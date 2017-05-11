@@ -22,6 +22,11 @@ namespace NanoBuilder
 
       public T Build()
       {
+         if ( typeof( T ) == typeof( string ) )
+         {
+            return default( T );
+         }
+
          var constructors = typeof( T ).GetConstructors();
 
          if ( constructors.Length == 0 )

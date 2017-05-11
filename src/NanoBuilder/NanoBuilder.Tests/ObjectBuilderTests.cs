@@ -23,6 +23,14 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
+      public void Build_BuildingAString_ReturnsDefaultString()
+      {
+         string value = ObjectBuilder<string>.Create().Build();
+
+         value.Should().Be( default( string ) );
+      }
+
+      [Fact]
       public void Build_BuildingAUriWithParameter_ReturnsTheConstructedObject()
       {
          const string address = "http://google.com";
