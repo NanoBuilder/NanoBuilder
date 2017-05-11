@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using FluentAssertions;
 
 namespace NanoBuilder.Tests
@@ -19,6 +20,16 @@ namespace NanoBuilder.Tests
          int value = ObjectBuilder<int>.Create().Build();
 
          value.Should().Be( default( int ) );
+      }
+
+      [Fact]
+      public void Build_BuildingAUriWithParameter_ReturnsTheConstructedObject()
+      {
+         const string address = "http://google.com";
+
+         var uri = ObjectBuilder<Uri>.Create().With( () => address ).Build();
+
+         uri.OriginalString.Should().Be( address );
       }
    }
 }
