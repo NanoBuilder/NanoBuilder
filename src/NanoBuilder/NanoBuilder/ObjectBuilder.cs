@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace NanoBuilder
 {
@@ -34,7 +36,7 @@ namespace NanoBuilder
             return default( T );
          }
 
-         var constructor = constructors[0];
+         var constructor = MatchConstructor( constructors, _typeMap );
          var constructorParameters = constructor.GetParameters();
 
          var callingParameters = new object[constructorParameters.Length];
@@ -48,6 +50,23 @@ namespace NanoBuilder
          }
 
          return (T) constructor.Invoke( callingParameters );
+      }
+
+      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, Dictionary<Type, object> typeMap )
+      {
+         var indexedConstructors = new Dictionary<ConstructorInfo, int>();
+
+         foreach ( var constructor in constructors )
+         {
+            var parameterTypes = constructor.GetParameters().Select( p => p.ParameterType );
+            var intersection = parameterTypes.Intersect( typeMap.Keys );
+
+            int sharedParameters = intersection.Count();
+            indexedConstructors.Add( constructor, sharedParameters );
+         }
+
+         var mostMatchedConstructors = indexedConstructors.OrderByDescending( k => k.Value );
+         return mostMatchedConstructors.First().Key;
       }
    }
 }

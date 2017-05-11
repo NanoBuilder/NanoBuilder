@@ -39,5 +39,17 @@ namespace NanoBuilder.Tests
 
          uri.OriginalString.Should().Be( address );
       }
+
+      [Fact]
+      public void Build_BuildingAnExceptionWithComplexConstructor_ReturnsTheConstructedObject()
+      {
+         var innerException = new OverflowException();
+
+         var exception = ObjectBuilder<Exception>.Create()
+            .With<Exception>( () => innerException )
+            .Build();
+
+         exception.InnerException.Should().Be( innerException );
+      }
    }
 }
