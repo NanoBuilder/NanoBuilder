@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder", "NanoBuilder\NanoBuilder.csproj", "{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.Tests", "NanoBuilder.Tests\NanoBuilder.Tests.csproj", "{DD77680F-C452-4401-BA3A-1B4979356934}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD77680F-C452-4401-BA3A-1B4979356934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD77680F-C452-4401-BA3A-1B4979356934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD77680F-C452-4401-BA3A-1B4979356934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD77680F-C452-4401-BA3A-1B4979356934}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
