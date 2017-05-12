@@ -66,6 +66,15 @@ namespace NanoBuilder
          }
 
          var mostMatchedConstructors = indexedConstructors.OrderByDescending( k => k.Value );
+         int highestMatch = mostMatchedConstructors.First().Value;
+
+         int occurrencesWithHighestMatch = mostMatchedConstructors.Count( kvp => kvp.Value == highestMatch );
+
+         if ( occurrencesWithHighestMatch > 1 )
+         {
+            throw new AmbiguousConstructorException();
+         }
+
          return mostMatchedConstructors.First().Key;
       }
    }

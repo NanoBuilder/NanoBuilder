@@ -31,13 +31,13 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void Build_BuildingAUriWithParameter_ReturnsTheConstructedObject()
+      public void Build_BuildingAGuidWithParameter_ReturnsTheConstructedObject()
       {
-         const string address = "http://google.com";
+         const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
 
-         var uri = ObjectBuilder<Uri>.Create().With( () => address ).Build();
+         var guid = ObjectBuilder<Guid>.Create().With( () => guidString ).Build();
 
-         uri.OriginalString.Should().Be( address );
+         guid.ToString().Should().Be( guidString );
       }
 
       [Fact]
@@ -50,6 +50,16 @@ namespace NanoBuilder.Tests
             .Build();
 
          exception.InnerException.Should().Be( innerException );
+      }
+
+      [Fact]
+      public void Build_BuildingAVersionWithAmbiguousParameters_ThrowsAmbiguousConstructorException()
+      {
+         const int ambiguousInteger = 5;
+
+         Action build = () => ObjectBuilder<Version>.Create().With( () => ambiguousInteger ).Build();
+
+         build.ShouldThrow<AmbiguousConstructorException>();
       }
    }
 }
