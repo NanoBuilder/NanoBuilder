@@ -99,12 +99,8 @@ namespace NanoBuilder
 
          if ( overlappedMatches > 1 )
          {
-            string foundConstructorsMessage = string.Empty;
-
-            foreach ( var x in occurrencesWithHighestMatch )
-            {
-               foundConstructorsMessage += "  " + x.Key + Environment.NewLine;
-            }
+            string foundConstructorsMessage = occurrencesWithHighestMatch.Aggregate( string.Empty,
+               ( i, j ) => i + "  " + j.Key + Environment.NewLine );
 
             string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
             throw new AmbiguousConstructorException( exceptionMessage );
