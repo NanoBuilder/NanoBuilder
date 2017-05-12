@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 
 namespace NanoBuilder
 {
    public class MoqMapper : ITypeMapper
    {
+      private readonly ITypeInspector _typeInspector;
+
+      internal MoqMapper( ITypeInspector typeInspector )
+      {
+         _typeInspector = typeInspector;
+      }
+
       public object CreateForInterface( Type type )
       {
          Type[] typeArguments = { type };
 
-         var mockType = Type.GetType( "Moq.Mock`1,Moq" );
+         var mockType = _typeInspector.GetType( "Moq.Mock`1,Moq" );
+
+         if ( mockType == null )
+         {
+            throw new TypeMapperException();
+         }
+
          var closedMockType = mockType.MakeGenericType( typeArguments );
 
          var mockObject = Activator.CreateInstance( closedMockType );

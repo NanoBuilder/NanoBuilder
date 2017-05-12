@@ -128,5 +128,20 @@ namespace NanoBuilder.Tests
 
          Mock.Get( logger.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
       }
+
+      [Fact]
+      public void Build_MoqAssemblyNotPresent_ThrowsTypeMapperException()
+      {
+         const string mockType = "Moq.Mock`1,Moq";
+
+         var typeInspectorMock = new Mock<ITypeInspector>();
+         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
+
+         Action build = () => new ObjectBuilder<Logger>( typeInspectorMock.Object )
+            .MapInterfacesTo<MoqMapper>()
+            .Build();
+
+         build.ShouldThrow<TypeMapperException>();
+      }
    }
 }

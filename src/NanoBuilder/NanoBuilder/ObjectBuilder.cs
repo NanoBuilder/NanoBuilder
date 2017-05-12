@@ -7,21 +7,24 @@ namespace NanoBuilder
 {
    public static class ObjectBuilder
    {
-      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>();
+      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>( new TypeInspector() );
    }
 
    public class ObjectBuilder<T>
    {
       private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
+      private readonly ITypeInspector _typeInspector;
       private ITypeMapper _interfaceMapper;
 
-      internal ObjectBuilder()
+      internal ObjectBuilder( ITypeInspector typeInspector )
       {
+         _typeInspector = typeInspector;
       }
 
-      public ObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper, new()
+      public ObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
-         _interfaceMapper = new TMapperType();
+         var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
+         _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );
 
          return this;
       }
