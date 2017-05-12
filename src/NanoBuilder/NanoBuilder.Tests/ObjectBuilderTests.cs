@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Xunit;
 using FluentAssertions;
+using Moq;
 using NanoBuilder.Tests.Stubs;
 
 namespace NanoBuilder.Tests
@@ -104,6 +105,18 @@ namespace NanoBuilder.Tests
 
          vertex.X.Should().Be( value );
          vertex.Y.Should().Be( default( int ) );
+      }
+
+      [Fact]
+      public void Build_ParameterIsAnInterface_InterfaceIsSetToTheMock()
+      {
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var logger = ObjectBuilder.For<Logger>()
+            .With( () => fileSystemMock.Object )
+            .Build();
+
+         logger.FileSystem.Should().Be( fileSystemMock.Object );
       }
    }
 }
