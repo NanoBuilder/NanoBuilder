@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace NanoBuilder
 {
+   public static class ObjectBuilder
+   {
+      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>();
+   }
+
    public class ObjectBuilder<T>
    {
       private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
 
-      private ObjectBuilder()
+      internal ObjectBuilder()
       {
       }
 
-      public static ObjectBuilder<T> Create() => new ObjectBuilder<T>();
-
-      public ObjectBuilder<T> With<TParameterType>( Expression<Func<TParameterType>> expr )
+      public ObjectBuilder<T> With<TParameterType>( Func<TParameterType> parameterProvider )
       {
-         var instance = expr.Compile()();
+         var instance = parameterProvider();
 
          _typeMap[typeof( TParameterType )] = new TypeMapEntry( instance );
 

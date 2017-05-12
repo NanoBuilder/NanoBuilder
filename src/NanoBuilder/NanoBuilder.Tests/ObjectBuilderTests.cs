@@ -11,7 +11,7 @@ namespace NanoBuilder.Tests
       [Fact]
       public void Build_BuildingAnObject_ReturnsBuilderForThatType()
       {
-         var builder = ObjectBuilder<string>.Create();
+         var builder = ObjectBuilder.For<string>();
 
          builder.Should().BeOfType<ObjectBuilder<string>>();
       }
@@ -19,7 +19,7 @@ namespace NanoBuilder.Tests
       [Fact]
       public void Build_BuildingAnInt_ReturnsDefaultInt()
       {
-         int value = ObjectBuilder<int>.Create().Build();
+         int value = ObjectBuilder.For<int>().Build();
 
          value.Should().Be( default( int ) );
       }
@@ -27,7 +27,7 @@ namespace NanoBuilder.Tests
       [Fact]
       public void Build_BuildingAString_ReturnsDefaultString()
       {
-         string value = ObjectBuilder<string>.Create().Build();
+         string value = ObjectBuilder.For<string>().Build();
 
          value.Should().Be( default( string ) );
       }
@@ -37,7 +37,7 @@ namespace NanoBuilder.Tests
       {
          const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
 
-         var guid = ObjectBuilder<Guid>.Create()
+         var guid = ObjectBuilder.For<Guid>()
             .With( () => guidString )
             .Build();
 
@@ -47,7 +47,7 @@ namespace NanoBuilder.Tests
       [Fact]
       public void Build_LeavesOneParameterUnmapped_UnmappedParameterIsDefaultValue()
       {
-         var eventArgs = ObjectBuilder<ProgressChangedEventArgs>.Create()
+         var eventArgs = ObjectBuilder.For<ProgressChangedEventArgs>()
             .With( () => 80 )
             .Build();
 
@@ -59,7 +59,7 @@ namespace NanoBuilder.Tests
       {
          var innerException = new OverflowException();
 
-         var exception = ObjectBuilder<Exception>.Create()
+         var exception = ObjectBuilder.For<Exception>()
             .With<Exception>( () => innerException )
             .Build();
 
@@ -71,7 +71,7 @@ namespace NanoBuilder.Tests
       {
          const int ambiguousInteger = 5;
 
-         Action build = () => ObjectBuilder<Version>.Create()
+         Action build = () => ObjectBuilder.For<Version>()
             .With( () => ambiguousInteger )
             .Build();
 
@@ -83,7 +83,7 @@ namespace NanoBuilder.Tests
       {
          const int ambiguousInteger = 5;
 
-         Action build = () => ObjectBuilder<Version>.Create()
+         Action build = () => ObjectBuilder.For<Version>()
             .With( () => ambiguousInteger )
             .Build();
 
@@ -98,7 +98,7 @@ namespace NanoBuilder.Tests
       {
          const int value = 5;
 
-         var vertex = ObjectBuilder<Vertex>.Create()
+         var vertex = ObjectBuilder.For<Vertex>()
             .With( () => value )
             .Build();
 
