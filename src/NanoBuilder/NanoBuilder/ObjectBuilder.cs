@@ -48,7 +48,11 @@ namespace NanoBuilder
          {
             if ( _typeMap.ContainsKey( constructorParameters[index].ParameterType ) )
             {
-               callingParameters[index] = _typeMap[constructorParameters[index].ParameterType].Instance;
+               if ( !_typeMap[constructorParameters[index].ParameterType].HasBeenMapped )
+               {
+                  _typeMap[constructorParameters[index].ParameterType].HasBeenMapped = true;
+                  callingParameters[index] = _typeMap[constructorParameters[index].ParameterType].Instance;
+               }
             }
          }
 

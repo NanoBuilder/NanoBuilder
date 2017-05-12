@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 using Xunit;
 using FluentAssertions;
+using NanoBuilder.Tests.Stubs;
 
 namespace NanoBuilder.Tests
 {
@@ -73,6 +75,17 @@ namespace NanoBuilder.Tests
             e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
             e.Message.Contains( "Void .ctor(Int32, Int32, Int32)" ) &&
             e.Message.Contains( "Void .ctor(Int32, Int32)" ) );
+      }
+
+      [Fact]
+      public void Build_BuildsVertexThatTakesTwoIntsButPassesOne_OnlyTheFirstIntIsUsed()
+      {
+         const int value = 5;
+
+         var vertex = ObjectBuilder<Vertex>.Create().With( () => value ).Build();
+
+         vertex.X.Should().Be( value );
+         vertex.Y.Should().Be( default( int ) );
       }
    }
 }
