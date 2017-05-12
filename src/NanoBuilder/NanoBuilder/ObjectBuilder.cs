@@ -7,15 +7,26 @@ namespace NanoBuilder
 {
    public static class ObjectBuilder
    {
-      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>();
+      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>( new TypeInspector() );
    }
 
    public class ObjectBuilder<T>
    {
       private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
+      private readonly ITypeInspector _typeInspector;
+      private ITypeMapper _interfaceMapper;
 
-      internal ObjectBuilder()
+      internal ObjectBuilder( ITypeInspector typeInspector )
       {
+         _typeInspector = typeInspector;
+      }
+
+      public ObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      {
+         var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
+         _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );
+
+         return this;
       }
 
       public ObjectBuilder<T> With<TParameterType>( Func<TParameterType> parameterProvider )
@@ -48,6 +59,15 @@ namespace NanoBuilder
 
          for ( int index = 0; index < constructorParameters.Length; index++ )
          {
+            if ( constructorParameters[index].ParameterType.IsInterface )
+            {
+               if ( _interfaceMapper != null )
+               {
+                  object instance = _interfaceMapper.CreateForInterface( constructorParameters[index].ParameterType );
+                  callingParameters[index] = instance;
+               }
+            }
+
             if ( _typeMap.ContainsKey( constructorParameters[index].ParameterType ) )
             {
                if ( !_typeMap[constructorParameters[index].ParameterType].HasBeenMapped )
@@ -82,12 +102,8 @@ namespace NanoBuilder
 
          if ( overlappedMatches > 1 )
          {
-            string foundConstructorsMessage = string.Empty;
-
-            foreach ( var x in occurrencesWithHighestMatch )
-            {
-               foundConstructorsMessage += "  " + x.Key + Environment.NewLine;
-            }
+            string foundConstructorsMessage = occurrencesWithHighestMatch.Aggregate( string.Empty,
+               ( i, j ) => i + "  " + j.Key + Environment.NewLine );
 
             string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
             throw new AmbiguousConstructorException( exceptionMessage );

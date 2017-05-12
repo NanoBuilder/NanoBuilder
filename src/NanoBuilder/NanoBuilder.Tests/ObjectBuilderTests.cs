@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Xunit;
 using FluentAssertions;
+using Moq;
 using NanoBuilder.Tests.Stubs;
 
 namespace NanoBuilder.Tests
@@ -104,6 +105,58 @@ namespace NanoBuilder.Tests
 
          vertex.X.Should().Be( value );
          vertex.Y.Should().Be( default( int ) );
+      }
+
+      [Fact]
+      public void Build_ParameterIsAnInterface_InterfaceIsSetToTheMock()
+      {
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var logger = ObjectBuilder.For<Logger>()
+            .With( () => fileSystemMock.Object )
+            .Build();
+
+         logger.FileSystem.Should().Be( fileSystemMock.Object );
+      }
+
+      [Fact]
+      public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAMockOfThatInterface()
+      {
+         var logger = ObjectBuilder.For<Logger>()
+            .MapInterfacesTo<MoqMapper>()
+            .Build();
+
+         Mock.Get( logger.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+      }
+
+      [Fact]
+      public void Build_MoqAssemblyNotPresent_ThrowsTypeMapperException()
+      {
+         const string mockType = "Moq.Mock`1,Moq";
+
+         var typeInspectorMock = new Mock<ITypeInspector>();
+         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
+
+         Action build = () => new ObjectBuilder<Logger>( typeInspectorMock.Object )
+            .MapInterfacesTo<MoqMapper>()
+            .Build();
+
+         build.ShouldThrow<TypeMapperException>();
+      }
+
+      [Fact]
+      public void Build_MoqAssemblyNotPresent_ExceptionMessageIsHelpful()
+      {
+         const string mockType = "Moq.Mock`1,Moq";
+
+         var typeInspectorMock = new Mock<ITypeInspector>();
+         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
+
+         Action build = () => new ObjectBuilder<Logger>( typeInspectorMock.Object )
+            .MapInterfacesTo<MoqMapper>()
+            .Build();
+
+         build.ShouldThrow<TypeMapperException>().Where( e => e.Message == Resources.TypeMapperMessage );
       }
    }
 }
