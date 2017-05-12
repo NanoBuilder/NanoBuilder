@@ -118,5 +118,15 @@ namespace NanoBuilder.Tests
 
          logger.FileSystem.Should().Be( fileSystemMock.Object );
       }
+
+      [Fact]
+      public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAMockOfThatInterface()
+      {
+         var logger = ObjectBuilder.For<Logger>()
+            .MapInterfacesTo<MoqMapper>()
+            .Build();
+
+         Mock.Get( logger.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+      }
    }
 }

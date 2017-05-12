@@ -13,9 +13,17 @@ namespace NanoBuilder
    public class ObjectBuilder<T>
    {
       private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
+      private ITypeMapper _interfaceMapper;
 
       internal ObjectBuilder()
       {
+      }
+
+      public ObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper, new()
+      {
+         _interfaceMapper = new TMapperType();
+
+         return this;
       }
 
       public ObjectBuilder<T> With<TParameterType>( Func<TParameterType> parameterProvider )
@@ -48,6 +56,15 @@ namespace NanoBuilder
 
          for ( int index = 0; index < constructorParameters.Length; index++ )
          {
+            if ( constructorParameters[index].ParameterType.IsInterface )
+            {
+               if ( _interfaceMapper != null )
+               {
+                  object instance = _interfaceMapper.CreateForInterface( constructorParameters[index].ParameterType );
+                  callingParameters[index] = instance;
+               }
+            }
+
             if ( _typeMap.ContainsKey( constructorParameters[index].ParameterType ) )
             {
                if ( !_typeMap[constructorParameters[index].ParameterType].HasBeenMapped )
