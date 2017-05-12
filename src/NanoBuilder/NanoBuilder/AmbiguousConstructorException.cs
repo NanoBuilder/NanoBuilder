@@ -12,7 +12,7 @@ namespace NanoBuilder
    public class AmbiguousConstructorException : Exception
    {
       /// <summary>
-      /// Initializes a new instance of the System.Exception class.
+      /// Initializes a new instance of the AmbiguousConstructorException class.
       /// </summary>
       public AmbiguousConstructorException()
       {
