@@ -61,5 +61,18 @@ namespace NanoBuilder.Tests
 
          build.ShouldThrow<AmbiguousConstructorException>();
       }
+
+      [Fact]
+      public void Build_BuildingAVersionWithAmbiguousParameters_ThrownExceptionIndicatesAmbiguousConstructors()
+      {
+         const int ambiguousInteger = 5;
+
+         Action build = () => ObjectBuilder<Version>.Create().With( () => ambiguousInteger ).Build();
+
+         build.ShouldThrow<AmbiguousConstructorException>().Where( e =>
+            e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
+            e.Message.Contains( "Void .ctor(Int32, Int32, Int32)" ) &&
+            e.Message.Contains( "Void .ctor(Int32, Int32)" ) );
+      }
    }
 }

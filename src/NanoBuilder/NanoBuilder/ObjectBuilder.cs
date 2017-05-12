@@ -68,11 +68,20 @@ namespace NanoBuilder
          var mostMatchedConstructors = indexedConstructors.OrderByDescending( k => k.Value );
          int highestMatch = mostMatchedConstructors.First().Value;
 
-         int occurrencesWithHighestMatch = mostMatchedConstructors.Count( kvp => kvp.Value == highestMatch );
+         var occurrencesWithHighestMatch = mostMatchedConstructors.Where( kvp => kvp.Value == highestMatch );
+         int overlappedMatches = occurrencesWithHighestMatch.Count();
 
-         if ( occurrencesWithHighestMatch > 1 )
+         if ( overlappedMatches > 1 )
          {
-            throw new AmbiguousConstructorException();
+            string foundConstructorsMessage = string.Empty;
+
+            foreach ( var x in occurrencesWithHighestMatch )
+            {
+               foundConstructorsMessage += "  " + x.Key + Environment.NewLine;
+            }
+
+            string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
+            throw new AmbiguousConstructorException( exceptionMessage );
          }
 
          return mostMatchedConstructors.First().Key;
