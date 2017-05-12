@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.ComponentModel;
 using Xunit;
 using FluentAssertions;
 using NanoBuilder.Tests.Stubs;
@@ -37,9 +37,21 @@ namespace NanoBuilder.Tests
       {
          const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
 
-         var guid = ObjectBuilder<Guid>.Create().With( () => guidString ).Build();
+         var guid = ObjectBuilder<Guid>.Create()
+            .With( () => guidString )
+            .Build();
 
          guid.ToString().Should().Be( guidString );
+      }
+
+      [Fact]
+      public void Build_LeavesOneParameterUnmapped_UnmappedParameterIsDefaultValue()
+      {
+         var eventArgs = ObjectBuilder<ProgressChangedEventArgs>.Create()
+            .With( () => 80 )
+            .Build();
+
+         eventArgs.UserState.Should().Be( default( object ) );
       }
 
       [Fact]
@@ -59,7 +71,9 @@ namespace NanoBuilder.Tests
       {
          const int ambiguousInteger = 5;
 
-         Action build = () => ObjectBuilder<Version>.Create().With( () => ambiguousInteger ).Build();
+         Action build = () => ObjectBuilder<Version>.Create()
+            .With( () => ambiguousInteger )
+            .Build();
 
          build.ShouldThrow<AmbiguousConstructorException>();
       }
@@ -69,7 +83,9 @@ namespace NanoBuilder.Tests
       {
          const int ambiguousInteger = 5;
 
-         Action build = () => ObjectBuilder<Version>.Create().With( () => ambiguousInteger ).Build();
+         Action build = () => ObjectBuilder<Version>.Create()
+            .With( () => ambiguousInteger )
+            .Build();
 
          build.ShouldThrow<AmbiguousConstructorException>().Where( e =>
             e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
@@ -82,7 +98,9 @@ namespace NanoBuilder.Tests
       {
          const int value = 5;
 
-         var vertex = ObjectBuilder<Vertex>.Create().With( () => value ).Build();
+         var vertex = ObjectBuilder<Vertex>.Create()
+            .With( () => value )
+            .Build();
 
          vertex.X.Should().Be( value );
          vertex.Y.Should().Be( default( int ) );
