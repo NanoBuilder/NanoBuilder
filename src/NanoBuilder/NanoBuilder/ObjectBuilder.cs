@@ -8,7 +8,7 @@ namespace NanoBuilder
 {
    public class ObjectBuilder<T>
    {
-      private readonly Dictionary<Type, object> _typeMap = new Dictionary<Type, object>();
+      private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
 
       private ObjectBuilder()
       {
@@ -18,7 +18,10 @@ namespace NanoBuilder
 
       public ObjectBuilder<T> With<TParameterType>( Expression<Func<TParameterType>> expr )
       {
-         _typeMap[typeof( TParameterType )] = expr.Compile()();
+         var instance = expr.Compile()();
+
+         _typeMap[typeof( TParameterType )] = new TypeMapEntry( instance );
+
          return this;
       }
 
@@ -45,14 +48,14 @@ namespace NanoBuilder
          {
             if ( _typeMap.ContainsKey( constructorParameters[index].ParameterType ) )
             {
-               callingParameters[index] = _typeMap[constructorParameters[index].ParameterType];
+               callingParameters[index] = _typeMap[constructorParameters[index].ParameterType].Instance;
             }
          }
 
          return (T) constructor.Invoke( callingParameters );
       }
 
-      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, Dictionary<Type, object> typeMap )
+      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, Dictionary<Type, TypeMapEntry> typeMap )
       {
          var indexedConstructors = new Dictionary<ConstructorInfo, int>();
 
