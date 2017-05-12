@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.ComponentModel;
 using Xunit;
 using FluentAssertions;
 using NanoBuilder.Tests.Stubs;
@@ -40,6 +40,14 @@ namespace NanoBuilder.Tests
          var guid = ObjectBuilder<Guid>.Create().With( () => guidString ).Build();
 
          guid.ToString().Should().Be( guidString );
+      }
+
+      [Fact]
+      public void Build_LeavesOneParameterUnmapped_UnmappedParameterIsDefaultValue()
+      {
+         var eventArgs = ObjectBuilder<ProgressChangedEventArgs>.Create().With( () => 80 ).Build();
+
+         eventArgs.UserState.Should().Be( default( object ) );
       }
 
       [Fact]
