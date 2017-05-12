@@ -20,11 +20,10 @@ namespace NanoBuilder
 
          if ( mockType == null )
          {
-            throw new TypeMapperException();
+            throw new TypeMapperException( Resources.TypeMapperMessage );
          }
 
          var closedMockType = mockType.MakeGenericType( typeArguments );
-
          var mockObject = Activator.CreateInstance( closedMockType );
 
          var objectProperty = mockObject.GetType().GetProperties().Single( t => t.Name == "Object" && t.PropertyType == type );
