@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>alexwnovak</owners>
+    <licenseUrl>https://github.com/alexwnovak/NanoBuilder/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/alexwnovak/NanoBuilder</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>nanobuilder builder automated unit tests</tags>
+  </metadata>
+</package>
