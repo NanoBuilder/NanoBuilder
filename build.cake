@@ -54,6 +54,26 @@ Task( "RunUnitTests" )
 } );
 
 //===========================================================================
+// Create NuGet Package Task
+//===========================================================================
+
+Task( "CreatePackage" )
+   .IsDependentOn( "RunUnitTests" )
+   .Does( () =>
+{
+   CreateDirectory( "./artifacts" );
+   
+   var settings = new NuGetPackSettings
+   {   
+     BasePath = "./src/NanoBuilder/NanoBuilder.Tests/bin/" + Directory( configuration ),
+     OutputDirectory = "./artifacts",
+     ArgumentCustomization = args => args.Append( "-Prop Configuration=" + configuration )
+   };
+   
+   NuGetPack( "./src/NanoBuilder/NanoBuilder/NanoBuilder.csproj", settings );
+} );
+
+//===========================================================================
 // Default Task
 //===========================================================================
 
