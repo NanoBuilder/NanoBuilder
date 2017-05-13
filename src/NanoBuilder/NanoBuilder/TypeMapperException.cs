@@ -34,8 +34,8 @@ namespace NanoBuilder
       /// <param name="innerException">
       /// The exception that is the cause of the current exception, or a null reference
       /// (Nothing in Visual Basic) if no inner exception is specified.</param>
-      public TypeMapperException( string message, Exception inner )
-         : base( message, inner )
+      public TypeMapperException( string message, Exception innerException )
+         : base( message, innerException )
       {
       }
 
