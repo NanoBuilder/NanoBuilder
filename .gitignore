@@ -25,6 +25,7 @@ tools/packages.config.md5sum
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 packages/
+*.nupkg
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
