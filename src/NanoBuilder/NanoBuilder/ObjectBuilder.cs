@@ -17,14 +17,10 @@ namespace NanoBuilder
       /// </summary>
       /// <typeparam name="T">The type of object to build.</typeparam>
       /// <returns>An ObjectBuilder instance that can build the given type.</returns>
-      public static ObjectBuilder<T> For<T>() => new ObjectBuilder<T>( new TypeInspector() );
+      public static IObjectBuilder<T> For<T>() => new ObjectBuilder<T>( new TypeInspector() );
    }
 
-   /// <summary>
-   /// A specific builder that can be configured to create the specified object type.
-   /// </summary>
-   /// <typeparam name="T">The type of object to build.</typeparam>
-   public class ObjectBuilder<T>
+   internal class ObjectBuilder<T> : IObjectBuilder<T>
    {
       private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
       private readonly ITypeInspector _typeInspector;
@@ -35,12 +31,7 @@ namespace NanoBuilder
          _typeInspector = typeInspector;
       }
 
-      /// <summary>
-      /// Configures how interface types should be initialized by default. 
-      /// </summary>
-      /// <typeparam name="TMapperType"></typeparam>
-      /// <returns></returns>
-      public ObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      public IObjectBuilder<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
          _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );
@@ -48,13 +39,7 @@ namespace NanoBuilder
          return this;
       }
 
-      /// <summary>
-      /// Configures a parameter for the object's constructor.
-      /// </summary>
-      /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
-      /// <param name="parameterProvider">A <see cref="Func{TResult}"/> that provides the instance for this parameter.</param>
-      /// <returns>The same <see cref="ObjectBuilder{T}"/>.</returns>
-      public ObjectBuilder<T> With<TParameterType>( Func<TParameterType> parameterProvider )
+      public IObjectBuilder<T> With<TParameterType>( Func<TParameterType> parameterProvider )
       {
          var instance = parameterProvider();
 
@@ -63,10 +48,6 @@ namespace NanoBuilder
          return this;
       }
 
-      /// <summary>
-      /// Creates the instance with the configured constructor parameters.
-      /// </summary>
-      /// <returns>The object instance.</returns>
       public T Build()
       {
          if ( typeof( T ) == typeof( string ) )

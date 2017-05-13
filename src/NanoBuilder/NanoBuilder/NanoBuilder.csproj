@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmbiguousConstructorException.cs" />
+    <Compile Include="IObjectBuilder.cs" />
     <Compile Include="ITypeInspector.cs" />
     <Compile Include="ITypeMapper.cs" />
     <Compile Include="MoqMapper.cs" />
