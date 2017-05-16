@@ -67,7 +67,9 @@ namespace NanoBuilder
          }
 
          var allMappedTypes = _typeMap.Flatten();
-         var constructor = ConstructorMatcher.Match( constructors, allMappedTypes );
+
+         var constructorMatcher = new ConstructorMatcher();
+         var constructor = constructorMatcher.Match( constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 
          var callingParameters = new object[constructorParameters.Length];

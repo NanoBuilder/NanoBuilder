@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace NanoBuilder
 {
-   internal class ConstructorMatcher
+   internal class ConstructorMatcher : IConstructorMatcher
    {
-      public static ConstructorInfo Match( ConstructorInfo[] constructors, Type[] types )
+      public ConstructorInfo Match( ConstructorInfo[] constructors, Type[] types )
       {
          var indexedConstructors = new Dictionary<ConstructorInfo, int>();
 
