@@ -60,7 +60,6 @@
       <DependentUpon>ITypeInspector.cs</DependentUpon>
     </Compile>
     <Compile Include="TypeMap.cs" />
-    <Compile Include="TypeMapEntry.cs" />
     <Compile Include="TypeMapperException.cs" />
   </ItemGroup>
   <ItemGroup>
