@@ -66,7 +66,8 @@ namespace NanoBuilder
             return default( T );
          }
 
-         var constructor = MatchConstructor( constructors, _typeMap );
+         var allMappedTypes = _typeMap.Flatten();
+         var constructor = ConstructorMatcher.Match( constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 
          var callingParameters = new object[constructorParameters.Length];
@@ -103,43 +104,5 @@ namespace NanoBuilder
       /// </param>
       public static implicit operator T( ParameterComposer<T> composer )
          => composer.Build();
-
-      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, TypeMap typeMap )
-      {
-         var indexedConstructors = new Dictionary<ConstructorInfo, int>();
-         var mappedParameterTypes = typeMap.Flatten();
-
-         foreach ( var constructor in constructors )
-         {
-            var parameterTypes = constructor.GetParameters().Select( p => p.ParameterType );
-
-            if ( parameterTypes.SequenceEqual( mappedParameterTypes ) )
-            {
-               return constructor;
-            }
-
-            var intersection = parameterTypes.Common( mappedParameterTypes );
-
-            int sharedParameters = intersection.Count();
-            indexedConstructors.Add( constructor, sharedParameters );
-         }
-
-         var mostMatchedConstructors = indexedConstructors.OrderByDescending( k => k.Value );
-         int highestMatch = mostMatchedConstructors.First().Value;
-
-         var occurrencesWithHighestMatch = mostMatchedConstructors.Where( kvp => kvp.Value == highestMatch );
-         int overlappedMatches = occurrencesWithHighestMatch.Count();
-
-         if ( overlappedMatches > 1 )
-         {
-            string foundConstructorsMessage = occurrencesWithHighestMatch.Aggregate( string.Empty,
-               ( i, j ) => i + "  " + j.Key + Environment.NewLine );
-
-            string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
-            throw new AmbiguousConstructorException( exceptionMessage );
-         }
-
-         return mostMatchedConstructors.First().Key;
-      }
    }
 }

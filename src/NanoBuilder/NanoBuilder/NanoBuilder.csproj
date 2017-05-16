@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmbiguousConstructorException.cs" />
+    <Compile Include="ConstructorMatcher.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="ParameterComposer.cs" />
     <Compile Include="ITypeInspector.cs" />
