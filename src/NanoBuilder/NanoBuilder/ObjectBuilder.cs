@@ -22,7 +22,7 @@ namespace NanoBuilder
 
    internal class ObjectBuilder<T> : IObjectBuilder<T>
    {
-      private readonly Dictionary<Type, TypeMapEntry> _typeMap = new Dictionary<Type, TypeMapEntry>();
+      private readonly TypeMap _typeMap = new TypeMap();
       private readonly ITypeInspector _typeInspector;
       private ITypeMapper _interfaceMapper;
 
@@ -43,7 +43,7 @@ namespace NanoBuilder
       {
          var instance = parameterProvider();
 
-         _typeMap[typeof( TParameterType )] = new TypeMapEntry( instance );
+         _typeMap.Add( instance );
 
          return this;
       }
@@ -78,27 +78,32 @@ namespace NanoBuilder
                }
             }
 
-            if ( _typeMap.ContainsKey( constructorParameters[index].ParameterType ) )
+            var (parameter, found) = _typeMap.Get( constructorParameters[index].ParameterType );
+
+            if ( found )
             {
-               if ( !_typeMap[constructorParameters[index].ParameterType].HasBeenMapped )
-               {
-                  _typeMap[constructorParameters[index].ParameterType].HasBeenMapped = true;
-                  callingParameters[index] = _typeMap[constructorParameters[index].ParameterType].Instance;
-               }
+               callingParameters[index] = parameter;
             }
          }
 
          return (T) constructor.Invoke( callingParameters );
       }
 
-      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, Dictionary<Type, TypeMapEntry> typeMap )
+      private static ConstructorInfo MatchConstructor( ConstructorInfo[] constructors, TypeMap typeMap )
       {
          var indexedConstructors = new Dictionary<ConstructorInfo, int>();
+         var mappedParameterTypes = typeMap.Flatten();
 
          foreach ( var constructor in constructors )
          {
             var parameterTypes = constructor.GetParameters().Select( p => p.ParameterType );
-            var intersection = parameterTypes.Intersect( typeMap.Keys );
+
+            if ( parameterTypes.SequenceEqual( mappedParameterTypes ) )
+            {
+               return constructor;
+            }
+
+            var intersection = parameterTypes.Common( mappedParameterTypes );
 
             int sharedParameters = intersection.Count();
             indexedConstructors.Add( constructor, sharedParameters );
