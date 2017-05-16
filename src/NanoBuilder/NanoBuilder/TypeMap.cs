@@ -32,5 +32,20 @@ namespace NanoBuilder
 
          return (null, false);
       }
+
+      public Type[] Flatten()
+      {
+         var types = new List<Type>();
+
+         foreach ( var kvp in _mappings )
+         {
+            for ( int index = 0; index < kvp.Value.Count; index++ )
+            {
+               types.Add( kvp.Key );
+            }
+         }
+
+         return types.ToArray();
+      }
    }
 }

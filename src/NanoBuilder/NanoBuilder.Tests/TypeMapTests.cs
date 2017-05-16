@@ -62,5 +62,38 @@ namespace NanoBuilder.Tests
 
          wasfound.Should().BeFalse();
       }
+
+      [Fact]
+      public void Flatten_HasNoTypes_ReturnsEmptySet()
+      {
+         var typeMap = new TypeMap();
+
+         var allElements = typeMap.Flatten();
+
+         allElements.Should().BeEmpty();
+      }
+
+      [Fact]
+      public void Flatten_HasOneType_ReturnsTheOneType()
+      {
+         var typeMap = new TypeMap();
+         typeMap.Add( 5 );
+         
+         var allElements = typeMap.Flatten();
+
+         allElements.Should().HaveCount( 1 ).And.Contain( typeof( int ) );
+      }
+
+      [Fact]
+      public void Flatten_HasTwoOfTheSameType_ReturnsAllTypes()
+      {
+         var typeMap = new TypeMap();
+         typeMap.Add( 5 );
+         typeMap.Add( 2 );
+
+         var allElements = typeMap.Flatten();
+
+         allElements.Should().HaveCount( 2 ).And.Contain( new[] { typeof( int ), typeof( int ) } );
+      }
    }
 }
