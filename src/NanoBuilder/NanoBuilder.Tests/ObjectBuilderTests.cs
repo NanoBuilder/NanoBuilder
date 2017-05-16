@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using Xunit;
 using FluentAssertions;
 using Moq;
@@ -137,26 +138,15 @@ namespace NanoBuilder.Tests
          var typeInspectorMock = new Mock<ITypeInspector>();
          typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
 
-         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
+         var constructorMatcherMock = new Mock<IConstructorMatcher>();
+         constructorMatcherMock.Setup( cm => cm.Match( It.IsAny<ConstructorInfo[]>(), It.IsAny<Type[]>() ) )
+            .Throws<TypeMapperException>();
+
+         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object, constructorMatcherMock.Object )
             .MapInterfacesTo<MoqMapper>()
             .Build();
 
          build.ShouldThrow<TypeMapperException>();
-      }
-
-      [Fact]
-      public void Build_MoqAssemblyNotPresent_ExceptionMessageIsHelpful()
-      {
-         const string mockType = "Moq.Mock`1,Moq";
-
-         var typeInspectorMock = new Mock<ITypeInspector>();
-         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
-
-         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
-            .MapInterfacesTo<MoqMapper>()
-            .Build();
-
-         build.ShouldThrow<TypeMapperException>().Where( e => e.Message == Resources.TypeMapperMessage );
       }
 
       [Fact]

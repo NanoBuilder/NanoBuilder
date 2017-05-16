@@ -13,11 +13,13 @@ namespace NanoBuilder
    {
       private readonly TypeMap _typeMap = new TypeMap();
       private readonly ITypeInspector _typeInspector;
+      private readonly IConstructorMatcher _constructorMatcher;
       private ITypeMapper _interfaceMapper;
 
-      internal ParameterComposer( ITypeInspector typeInspector )
+      internal ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
       {
          _typeInspector = typeInspector;
+         _constructorMatcher = constructorMatcher;
       }
 
       /// <summary>
@@ -68,8 +70,7 @@ namespace NanoBuilder
 
          var allMappedTypes = _typeMap.Flatten();
 
-         var constructorMatcher = new ConstructorMatcher();
-         var constructor = constructorMatcher.Match( constructors, allMappedTypes );
+         var constructor = _constructorMatcher.Match( constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 
          var callingParameters = new object[constructorParameters.Length];

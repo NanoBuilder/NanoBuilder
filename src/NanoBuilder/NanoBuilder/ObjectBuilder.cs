@@ -12,6 +12,7 @@
       /// </summary>
       /// <typeparam name="T">The type of object to build.</typeparam>
       /// <returns>An ObjectBuilder instance that can build the given type.</returns>
-      public static ParameterComposer<T> For<T>() => new ParameterComposer<T>( new TypeInspector() );
+      public static ParameterComposer<T> For<T>()
+         => new ParameterComposer<T>( new TypeInspector(), new ConstructorMatcher() );
    }
 }
