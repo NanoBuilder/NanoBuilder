@@ -158,5 +158,23 @@ namespace NanoBuilder.Tests
 
          build.ShouldThrow<TypeMapperException>().Where( e => e.Message == Resources.TypeMapperMessage );
       }
+
+      [Fact]
+      public void Build_PassesTwoIdenticalParameters_ParametersAreMappedToParameterOrder()
+      {
+         const int year = 2017;
+         const int month = 5;
+         const int day = 15;
+
+         var dateTime = ObjectBuilder.For<DateTime>()
+            .With( () => year )
+            .With( () => month )
+            .With( () => day )
+            .Build();
+
+         dateTime.Year.Should().Be( year );
+         dateTime.Month.Should().Be( month );
+         dateTime.Day.Should().Be( day );
+      }
    }
 }
