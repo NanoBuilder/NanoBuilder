@@ -14,7 +14,7 @@ namespace NanoBuilder.Tests
       {
          var builder = ObjectBuilder.For<string>();
 
-         builder.Should().BeOfType<ObjectBuilder<string>>();
+         builder.Should().BeOfType<ParameterComposer<string>>();
       }
 
       [Fact]
@@ -137,7 +137,7 @@ namespace NanoBuilder.Tests
          var typeInspectorMock = new Mock<ITypeInspector>();
          typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
 
-         Action build = () => new ObjectBuilder<Logger>( typeInspectorMock.Object )
+         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
             .MapInterfacesTo<MoqMapper>()
             .Build();
 
@@ -152,7 +152,7 @@ namespace NanoBuilder.Tests
          var typeInspectorMock = new Mock<ITypeInspector>();
          typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
 
-         Action build = () => new ObjectBuilder<Logger>( typeInspectorMock.Object )
+         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
             .MapInterfacesTo<MoqMapper>()
             .Build();
 
@@ -175,6 +175,17 @@ namespace NanoBuilder.Tests
          dateTime.Year.Should().Be( year );
          dateTime.Month.Should().Be( month );
          dateTime.Day.Should().Be( day );
+      }
+
+      [Fact]
+      public void ConversionOperator_HasTimeSpanWithOneParameter_ConvertsComposerToTimeSpanAutomatically()
+      {
+         const long ticks = 123L;
+
+         TimeSpan timeSpan = ObjectBuilder.For<TimeSpan>()
+            .With( () => ticks );
+
+         timeSpan.Ticks.Should().Be( ticks );
       }
    }
 }

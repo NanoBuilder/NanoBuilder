@@ -5,7 +5,7 @@ namespace NanoBuilder
 {
    /// <summary>
    /// Represents an error when the given constructor parameter configuration matches multiple
-   /// constructors. In this case, the <see cref="ObjectBuilder{T}" /> doesn't know what constructor
+   /// constructors. In this case, the <see cref="ParameterComposer{T}" /> doesn't know what constructor
    /// to use, since there are multiple options.
    /// </summary>
    [Serializable]
