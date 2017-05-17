@@ -35,7 +35,7 @@ namespace NanoBuilder
          if ( overlappedMatches > 1 )
          {
             string foundConstructorsMessage = occurrencesWithHighestMatch.Aggregate( string.Empty,
-                                                                                     ( i, j ) => i + "  " + j.Key + Environment.NewLine );
+               ( i, j ) => i + "  " + j.Key + Environment.NewLine );
 
             string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
             throw new AmbiguousConstructorException( exceptionMessage );

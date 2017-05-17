@@ -69,33 +69,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void Build_BuildingAVersionWithAmbiguousParameters_ThrowsAmbiguousConstructorException()
-      {
-         const int ambiguousInteger = 5;
-
-         Action build = () => ObjectBuilder.For<Version>()
-            .With( () => ambiguousInteger )
-            .Build();
-
-         build.ShouldThrow<AmbiguousConstructorException>();
-      }
-
-      [Fact]
-      public void Build_BuildingAVersionWithAmbiguousParameters_ThrownExceptionIndicatesAmbiguousConstructors()
-      {
-         const int ambiguousInteger = 5;
-
-         Action build = () => ObjectBuilder.For<Version>()
-            .With( () => ambiguousInteger )
-            .Build();
-
-         build.ShouldThrow<AmbiguousConstructorException>().Where( e =>
-            e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
-            e.Message.Contains( "Void .ctor(Int32, Int32, Int32)" ) &&
-            e.Message.Contains( "Void .ctor(Int32, Int32)" ) );
-      }
-
-      [Fact]
       public void Build_BuildsVertexThatTakesTwoIntsButPassesOne_OnlyTheFirstIntIsUsed()
       {
          const int value = 5;
