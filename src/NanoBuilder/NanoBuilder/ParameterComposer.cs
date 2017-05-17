@@ -40,12 +40,10 @@ namespace NanoBuilder
       /// Configures a parameter for the object's constructor.
       /// </summary>
       /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
-      /// <param name="parameterProvider">A <see cref="Func{TResult}"/> that provides the instance for this parameter.</param>
+      /// <param name="instance">The object that is being mapped for the given type.</param>
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> With<TParameterType>( Func<TParameterType> parameterProvider )
+      public ParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
-         var instance = parameterProvider();
-
          _typeMap.Add( instance );
 
          return this;
