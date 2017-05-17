@@ -40,7 +40,7 @@ namespace NanoBuilder.Tests
          const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
 
          var guid = ObjectBuilder.For<Guid>()
-            .With( () => guidString )
+            .With( guidString )
             .Build();
 
          guid.ToString().Should().Be( guidString );
@@ -50,7 +50,7 @@ namespace NanoBuilder.Tests
       public void Build_LeavesOneParameterUnmapped_UnmappedParameterIsDefaultValue()
       {
          var eventArgs = ObjectBuilder.For<ProgressChangedEventArgs>()
-            .With( () => 80 )
+            .With( 80 )
             .Build();
 
          eventArgs.UserState.Should().Be( default( object ) );
@@ -62,7 +62,7 @@ namespace NanoBuilder.Tests
          var innerException = new OverflowException();
 
          var exception = ObjectBuilder.For<Exception>()
-            .With<Exception>( () => innerException )
+            .With<Exception>( innerException )
             .Build();
 
          exception.InnerException.Should().Be( innerException );
@@ -74,7 +74,7 @@ namespace NanoBuilder.Tests
          const int value = 5;
 
          var vertex = ObjectBuilder.For<Vertex>()
-            .With( () => value )
+            .With( value )
             .Build();
 
          vertex.X.Should().Be( value );
@@ -87,7 +87,7 @@ namespace NanoBuilder.Tests
          var fileSystemMock = new Mock<IFileSystem>();
 
          var logger = ObjectBuilder.For<Logger>()
-            .With( () => fileSystemMock.Object )
+            .With( fileSystemMock.Object )
             .Build();
 
          logger.FileSystem.Should().Be( fileSystemMock.Object );
@@ -130,9 +130,9 @@ namespace NanoBuilder.Tests
          const int day = 15;
 
          var dateTime = ObjectBuilder.For<DateTime>()
-            .With( () => year )
-            .With( () => month )
-            .With( () => day )
+            .With( year )
+            .With( month )
+            .With( day )
             .Build();
 
          dateTime.Year.Should().Be( year );
@@ -146,7 +146,7 @@ namespace NanoBuilder.Tests
          const long ticks = 123L;
 
          TimeSpan timeSpan = ObjectBuilder.For<TimeSpan>()
-            .With( () => ticks );
+            .With( ticks );
 
          timeSpan.Ticks.Should().Be( ticks );
       }
