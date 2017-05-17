@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -11,9 +10,10 @@ namespace NanoBuilder
    /// <typeparam name="T">The type of object to build.</typeparam>
    public class ParameterComposer<T>
    {
-      private readonly TypeMap _typeMap = new TypeMap();
       private readonly ITypeInspector _typeInspector;
       private readonly IConstructorMatcher _constructorMatcher;
+
+      private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
       internal ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
@@ -30,6 +30,7 @@ namespace NanoBuilder
       public ParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
+
          _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );
 
          return this;
