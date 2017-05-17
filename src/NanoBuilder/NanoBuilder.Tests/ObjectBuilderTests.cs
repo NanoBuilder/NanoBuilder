@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using Xunit;
 using FluentAssertions;
 using Moq;
@@ -68,33 +69,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void Build_BuildingAVersionWithAmbiguousParameters_ThrowsAmbiguousConstructorException()
-      {
-         const int ambiguousInteger = 5;
-
-         Action build = () => ObjectBuilder.For<Version>()
-            .With( () => ambiguousInteger )
-            .Build();
-
-         build.ShouldThrow<AmbiguousConstructorException>();
-      }
-
-      [Fact]
-      public void Build_BuildingAVersionWithAmbiguousParameters_ThrownExceptionIndicatesAmbiguousConstructors()
-      {
-         const int ambiguousInteger = 5;
-
-         Action build = () => ObjectBuilder.For<Version>()
-            .With( () => ambiguousInteger )
-            .Build();
-
-         build.ShouldThrow<AmbiguousConstructorException>().Where( e =>
-            e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
-            e.Message.Contains( "Void .ctor(Int32, Int32, Int32)" ) &&
-            e.Message.Contains( "Void .ctor(Int32, Int32)" ) );
-      }
-
-      [Fact]
       public void Build_BuildsVertexThatTakesTwoIntsButPassesOne_OnlyTheFirstIntIsUsed()
       {
          const int value = 5;
@@ -137,26 +111,15 @@ namespace NanoBuilder.Tests
          var typeInspectorMock = new Mock<ITypeInspector>();
          typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
 
-         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
+         var constructorMatcherMock = new Mock<IConstructorMatcher>();
+         constructorMatcherMock.Setup( cm => cm.Match( It.IsAny<ConstructorInfo[]>(), It.IsAny<Type[]>() ) )
+            .Throws<TypeMapperException>();
+
+         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object, constructorMatcherMock.Object )
             .MapInterfacesTo<MoqMapper>()
             .Build();
 
          build.ShouldThrow<TypeMapperException>();
-      }
-
-      [Fact]
-      public void Build_MoqAssemblyNotPresent_ExceptionMessageIsHelpful()
-      {
-         const string mockType = "Moq.Mock`1,Moq";
-
-         var typeInspectorMock = new Mock<ITypeInspector>();
-         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
-
-         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object )
-            .MapInterfacesTo<MoqMapper>()
-            .Build();
-
-         build.ShouldThrow<TypeMapperException>().Where( e => e.Message == Resources.TypeMapperMessage );
       }
 
       [Fact]
