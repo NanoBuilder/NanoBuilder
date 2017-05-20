@@ -11,6 +11,9 @@
       private const string _moqMapperMessage = "Unable to locate Moq.Mock type. Are you referencing Moq?";
       public static string MoqMapperMessage = _moqMapperMessage;
 
+      private const string _nsubstituteMapperMessage = "Unable to locate NSubstitute.Substitute type. Are you referencing NSubstitute?";
+      public static string NSubstituteMapperMessage = _nsubstituteMapperMessage;
+
       private const string _parameterMappingMessage = "No public constructors on type {0} were found to accept a parameter of type {1}";
       public static string ParameterMappingMessage = _parameterMappingMessage;
 

@@ -70,6 +70,7 @@
     <Compile Include="ConstructorMatcherTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="MoqMapperTests.cs" />
+    <Compile Include="NSubstituteMapperTests.cs" />
     <Compile Include="ObjectBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RhinoMocksMapperTests.cs" />

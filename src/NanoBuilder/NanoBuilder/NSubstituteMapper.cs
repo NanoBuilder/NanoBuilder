@@ -30,6 +30,11 @@ namespace NanoBuilder
       {
          var mockType = _typeInspector.GetType( "NSubstitute.Substitute,NSubstitute" );
 
+         if ( mockType == null )
+         {
+            throw new TypeMapperException( Resources.NSubstituteMapperMessage );
+         }
+
          var forMethod = ( from m in mockType.GetMethods( BindingFlags.Public | BindingFlags.Static )
                            from p in m.GetParameters()
                            where m.Name == "For"
