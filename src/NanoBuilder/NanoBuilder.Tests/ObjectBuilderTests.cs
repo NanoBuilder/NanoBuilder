@@ -94,25 +94,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void Build_MoqAssemblyNotPresent_ThrowsTypeMapperException()
-      {
-         const string mockType = "Moq.Mock`1,Moq";
-
-         var typeInspectorMock = new Mock<ITypeInspector>();
-         typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
-
-         var constructorMatcherMock = new Mock<IConstructorMatcher>();
-         constructorMatcherMock.Setup( cm => cm.Match( It.IsAny<ConstructorInfo[]>(), It.IsAny<Type[]>() ) )
-            .Throws<TypeMapperException>();
-
-         Action build = () => new ParameterComposer<Logger>( null, typeInspectorMock.Object, constructorMatcherMock.Object )
-            .MapInterfacesTo<MoqMapper>()
-            .Build();
-
-         build.ShouldThrow<TypeMapperException>();
-      }
-
-      [Fact]
       public void Build_PassesTwoIdenticalParameters_ParametersAreMappedToParameterOrder()
       {
          const int year = 2017;
