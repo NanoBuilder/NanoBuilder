@@ -83,20 +83,14 @@ namespace NanoBuilder
       /// <returns>The object instance.</returns>
       public T Build()
       {
-         if ( SpecialType.CanAutomaticallyActivate<T>() )
-         {
-            return Default<T>();
-         }
-
-         var constructors = typeof( T ).GetConstructors();
-
-         if ( constructors.Length == 0 )
+         if ( SpecialType.CanAutomaticallyActivate<T>() || !SpecialType.HasConstructors<T>() )
          {
             return Default<T>();
          }
 
          var allMappedTypes = _typeMap.Flatten();
 
+         var constructors = typeof( T ).GetConstructors();
          var constructor = _constructorMatcher.Match( constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 
