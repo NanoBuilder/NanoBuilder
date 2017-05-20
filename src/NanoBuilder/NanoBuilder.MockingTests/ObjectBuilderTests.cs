@@ -1,4 +1,5 @@
 ﻿using System;
+using FakeItEasy.Creation;
 using Xunit;
 using FluentAssertions;
 using Moq;
@@ -48,6 +49,16 @@ namespace NanoBuilder.MockingTests
             .Build();
 
          logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( ICallRouter ) );
+      }
+
+      [Fact]
+      public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAFakeItEasyMock()
+      {
+         var logger = ObjectBuilder.For<Logger>()
+            .MapInterfacesTo<FakeItEasyMapper>()
+            .Build();
+
+         logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( ITaggable ) );
       }
    }
 }
