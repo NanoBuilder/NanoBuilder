@@ -66,7 +66,8 @@ namespace NanoBuilder
 
          if ( !parameterMatches.Any() )
          {
-            throw new ParameterMappingException();
+            string message = string.Format( Resources.ParameterMappingMessage, typeof( T ), typeof( TParameterType ) );
+            throw new ParameterMappingException( message );
          }
 
          _typeMap.Add( instance );
