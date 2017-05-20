@@ -44,6 +44,11 @@ namespace NanoBuilder
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
       public ParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
+         if ( _interfaceMapper != null )
+         {
+            throw new MapperException( Resources.MapperMessage );
+         }
+
          var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
 
          _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );

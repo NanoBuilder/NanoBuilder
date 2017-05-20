@@ -94,16 +94,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAMockOfThatInterface()
-      {
-         var logger = ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<MoqMapper>()
-            .Build();
-
-         Mock.Get( logger.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
-      }
-
-      [Fact]
       public void Build_MoqAssemblyNotPresent_ThrowsTypeMapperException()
       {
          const string mockType = "Moq.Mock`1,Moq";
