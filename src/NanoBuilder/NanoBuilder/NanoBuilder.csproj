@@ -59,6 +59,7 @@
     <Compile Include="ParameterMappingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="RhinoMocksMapper.cs" />
     <Compile Include="SpecialType.cs" />
     <Compile Include="TypeInspector.cs">
       <DependentUpon>ITypeInspector.cs</DependentUpon>
