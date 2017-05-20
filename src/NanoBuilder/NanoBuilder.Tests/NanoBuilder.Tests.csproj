@@ -71,6 +71,7 @@
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="ObjectBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stubs\FileSystemAggregator.cs" />
     <Compile Include="Stubs\IFileSystem.cs" />
     <Compile Include="Stubs\Logger.cs" />
     <Compile Include="Stubs\Vertex.cs" />

@@ -164,5 +164,20 @@ namespace NanoBuilder.Tests
          vertex.X.Should().Be( default( int ) );
          vertex.Y.Should().Be( y );
       }
+
+      [Fact]
+      public void Skip_SkipsFirstConstructorButMapsSecondWithMoqMapper_SecondParameterIsSetToMockType()
+      {
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var fileSystemAggregator = ObjectBuilder.For<FileSystemAggregator>()
+            .MapInterfacesTo<MoqMapper>()
+            .Skip<IFileSystem>()
+            .With( fileSystemMock.Object )
+            .Build();
+
+         Mock.Get( fileSystemAggregator.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+         fileSystemAggregator.FileSystem2.Should().Be( fileSystemMock.Object );
+      }
    }
 }

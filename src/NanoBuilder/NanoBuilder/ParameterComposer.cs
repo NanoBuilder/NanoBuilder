@@ -58,7 +58,15 @@ namespace NanoBuilder
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
       public ParameterComposer<T> Skip<TParameterType>()
       {
-         _typeMap.Add( default( TParameterType ) );
+         var type = typeof( TParameterType );
+         TParameterType instance = default( TParameterType );
+
+         if ( type.IsInterface && _interfaceMapper != null )
+         {
+            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
+         }
+
+         _typeMap.Add( instance );
 
          return this;
       }
