@@ -86,14 +86,14 @@ namespace NanoBuilder
       {
          if ( typeof( T ) == typeof( string ) )
          {
-            return default( T );
+            return Default<T>();
          }
 
          var constructors = typeof( T ).GetConstructors();
 
          if ( constructors.Length == 0 )
          {
-            return default( T );
+            return Default<T>();
          }
 
          var allMappedTypes = _typeMap.Flatten();
