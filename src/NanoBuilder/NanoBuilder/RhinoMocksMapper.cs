@@ -30,6 +30,11 @@ namespace NanoBuilder
       {
          var mockType = _typeInspector.GetType( "Rhino.Mocks.MockRepository,Rhino.Mocks" );
 
+         if ( mockType == null )
+         {
+            throw new TypeMapperException( Resources.RhinoMocksMapperMessage );
+         }
+
          var generateMethod = ( from m in mockType.GetMethods( BindingFlags.Public | BindingFlags.Static )
                                 from p in m.GetParameters()
                                 where m.Name == "GenerateStub"

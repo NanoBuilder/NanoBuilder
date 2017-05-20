@@ -69,8 +69,11 @@
   <ItemGroup>
     <Compile Include="ConstructorMatcherTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
+    <Compile Include="MoqMapperTests.cs" />
+    <Compile Include="NSubstituteMapperTests.cs" />
     <Compile Include="ObjectBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RhinoMocksMapperTests.cs" />
     <Compile Include="Stubs\FileSystemAggregator.cs" />
     <Compile Include="Stubs\FileSystemCache.cs" />
     <Compile Include="Stubs\IFileSystem.cs" />
