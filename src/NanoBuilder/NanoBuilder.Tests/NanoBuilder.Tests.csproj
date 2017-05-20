@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="ConstructorMatcherTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
+    <Compile Include="FakeItEasyMapperTests.cs" />
     <Compile Include="MoqMapperTests.cs" />
     <Compile Include="NSubstituteMapperTests.cs" />
     <Compile Include="ObjectBuilderTests.cs" />

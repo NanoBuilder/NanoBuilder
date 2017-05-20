@@ -50,6 +50,7 @@
     <Compile Include="AmbiguousConstructorException.cs" />
     <Compile Include="ConstructorMatcher.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="FakeItEasyMapper.cs" />
     <Compile Include="IConstructorMatcher.cs" />
     <Compile Include="MapperException.cs" />
     <Compile Include="NSubstituteMapper.cs" />
