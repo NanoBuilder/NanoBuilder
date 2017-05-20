@@ -150,5 +150,19 @@ namespace NanoBuilder.Tests
 
          timeSpan.Ticks.Should().Be( ticks );
       }
+
+      [Fact]
+      public void Skip_SkipsFirstConstructorButMapsSecond_SecondParameterIsSetButNotFirst()
+      {
+         const int y = 123;
+
+         var vertex = ObjectBuilder.For<Vertex>()
+            .Skip<int>()
+            .With( y )
+            .Build();
+
+         vertex.X.Should().Be( default( int ) );
+         vertex.Y.Should().Be( y );
+      }
    }
 }
