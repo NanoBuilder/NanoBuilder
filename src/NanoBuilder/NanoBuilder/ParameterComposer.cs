@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -84,7 +83,7 @@ namespace NanoBuilder
       /// <returns>The object instance.</returns>
       public T Build()
       {
-         if ( typeof( T ) == typeof( string ) )
+         if ( SpecialType.CanAutomaticallyActivate<T>() )
          {
             return Default<T>();
          }
