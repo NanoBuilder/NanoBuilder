@@ -115,7 +115,7 @@ namespace NanoBuilder.Tests
          constructorMatcherMock.Setup( cm => cm.Match( It.IsAny<ConstructorInfo[]>(), It.IsAny<Type[]>() ) )
             .Throws<TypeMapperException>();
 
-         Action build = () => new ParameterComposer<Logger>( typeInspectorMock.Object, constructorMatcherMock.Object )
+         Action build = () => new ParameterComposer<Logger>( null, typeInspectorMock.Object, constructorMatcherMock.Object )
             .MapInterfacesTo<MoqMapper>()
             .Build();
 
@@ -192,6 +192,14 @@ namespace NanoBuilder.Tests
 
          Mock.Get( fileSystemAggregator.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
          fileSystemAggregator.FileSystem2.Should().Be( fileSystemMock.Object );
+      }
+
+      [Fact]
+      public void With_NoConstructorAcceptsTheParameterType_ThrowsParameterMappingException()
+      {
+         Action with = () => ObjectBuilder.For<Version>().With( 100.0 );
+
+         with.ShouldThrow<ParameterMappingException>();
       }
    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -9,14 +10,16 @@ namespace NanoBuilder
    /// <typeparam name="T">The type of object to build.</typeparam>
    public class ParameterComposer<T>
    {
+      private readonly ConstructorInfo[] _constructors;
       private readonly ITypeInspector _typeInspector;
       private readonly IConstructorMatcher _constructorMatcher;
 
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      internal ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
+      internal ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
       {
+         _constructors = constructors;
          _typeInspector = typeInspector;
          _constructorMatcher = constructorMatcher;
       }
@@ -56,6 +59,16 @@ namespace NanoBuilder
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
       public ParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
+         var parameterMatches = from c in _constructors
+                                from p in c.GetParameters()
+                                where p.ParameterType == typeof( TParameterType )
+                                select p.ParameterType;
+
+         if ( !parameterMatches.Any() )
+         {
+            throw new ParameterMappingException();
+         }
+
          _typeMap.Add( instance );
 
          return this;
