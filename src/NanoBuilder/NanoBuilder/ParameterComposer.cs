@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -20,6 +19,19 @@ namespace NanoBuilder
       {
          _typeInspector = typeInspector;
          _constructorMatcher = constructorMatcher;
+      }
+
+      private TParameterType Default<TParameterType>()
+      {
+         var type = typeof( TParameterType );
+         TParameterType instance = default( TParameterType );
+
+         if ( type.IsInterface && _interfaceMapper != null )
+         {
+            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
+         }
+
+         return instance;
       }
 
       /// <summary>
@@ -50,25 +62,35 @@ namespace NanoBuilder
       }
 
       /// <summary>
+      /// Provides a default value for the given type, allowing you to "skip" mapping a
+      /// parameter. This is useful when a constructor accepts multiple parameters of the
+      /// same type, and you want to map some of them (but not all).
+      /// </summary>
+      /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
+      /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
+      public ParameterComposer<T> Skip<TParameterType>()
+      {
+         TParameterType instance = Default<TParameterType>();
+
+         _typeMap.Add( instance );
+
+         return this;
+      }
+
+      /// <summary>
       /// Creates the instance with the configured constructor parameters.
       /// </summary>
       /// <returns>The object instance.</returns>
       public T Build()
       {
-         if ( typeof( T ) == typeof( string ) )
+         if ( SpecialType.CanAutomaticallyActivate<T>() || !SpecialType.HasConstructors<T>() )
          {
-            return default( T );
-         }
-
-         var constructors = typeof( T ).GetConstructors();
-
-         if ( constructors.Length == 0 )
-         {
-            return default( T );
+            return Default<T>();
          }
 
          var allMappedTypes = _typeMap.Flatten();
 
+         var constructors = typeof( T ).GetConstructors();
          var constructor = _constructorMatcher.Match( constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 

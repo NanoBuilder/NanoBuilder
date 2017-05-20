@@ -141,6 +141,20 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
+      public void Build_DoesNotSpecifyInterfaceButMapsPrimitiveType_TypesMapCorrectly()
+      {
+         const int cacheSize = 256;
+
+         var fileSystemCache = ObjectBuilder.For<FileSystemCache>()
+            .MapInterfacesTo<MoqMapper>()
+            .With( cacheSize )
+            .Build();
+
+         Mock.Get( fileSystemCache.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+         fileSystemCache.CacheSize.Should().Be( cacheSize );
+      }
+
+      [Fact]
       public void ConversionOperator_HasTimeSpanWithOneParameter_ConvertsComposerToTimeSpanAutomatically()
       {
          const long ticks = 123L;
@@ -149,6 +163,35 @@ namespace NanoBuilder.Tests
             .With( ticks );
 
          timeSpan.Ticks.Should().Be( ticks );
+      }
+
+      [Fact]
+      public void Skip_SkipsFirstConstructorButMapsSecond_SecondParameterIsSetButNotFirst()
+      {
+         const int y = 123;
+
+         var vertex = ObjectBuilder.For<Vertex>()
+            .Skip<int>()
+            .With( y )
+            .Build();
+
+         vertex.X.Should().Be( default( int ) );
+         vertex.Y.Should().Be( y );
+      }
+
+      [Fact]
+      public void Skip_SkipsFirstConstructorButMapsSecondWithMoqMapper_SecondParameterIsSetToMockType()
+      {
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var fileSystemAggregator = ObjectBuilder.For<FileSystemAggregator>()
+            .MapInterfacesTo<MoqMapper>()
+            .Skip<IFileSystem>()
+            .With( fileSystemMock.Object )
+            .Build();
+
+         Mock.Get( fileSystemAggregator.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+         fileSystemAggregator.FileSystem2.Should().Be( fileSystemMock.Object );
       }
    }
 }
