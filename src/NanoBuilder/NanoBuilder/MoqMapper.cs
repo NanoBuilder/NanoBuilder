@@ -32,7 +32,7 @@ namespace NanoBuilder
 
          if ( mockType == null )
          {
-            throw new TypeMapperException( Resources.TypeMapperMessage );
+            throw new TypeMapperException( Resources.MoqMapperMessage );
          }
 
          var closedMockType = mockType.MakeGenericType( typeArguments );
