@@ -22,6 +22,19 @@ namespace NanoBuilder
          _constructorMatcher = constructorMatcher;
       }
 
+      private TParameterType Default<TParameterType>()
+      {
+         var type = typeof( TParameterType );
+         TParameterType instance = default( TParameterType );
+
+         if ( type.IsInterface && _interfaceMapper != null )
+         {
+            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
+         }
+
+         return instance;
+      }
+
       /// <summary>
       /// Configures how interface types should be initialized by default. 
       /// </summary>
@@ -58,13 +71,7 @@ namespace NanoBuilder
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
       public ParameterComposer<T> Skip<TParameterType>()
       {
-         var type = typeof( TParameterType );
-         TParameterType instance = default( TParameterType );
-
-         if ( type.IsInterface && _interfaceMapper != null )
-         {
-            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
-         }
+         TParameterType instance = Default<TParameterType>();
 
          _typeMap.Add( instance );
 
