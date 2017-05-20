@@ -141,6 +141,20 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
+      public void Build_DoesNotSpecifyInterfaceButMapsPrimitiveType_TypesMapCorrectly()
+      {
+         const int cacheSize = 256;
+
+         var fileSystemCache = ObjectBuilder.For<FileSystemCache>()
+            .MapInterfacesTo<MoqMapper>()
+            .With( cacheSize )
+            .Build();
+
+         Mock.Get( fileSystemCache.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
+         fileSystemCache.CacheSize.Should().Be( cacheSize );
+      }
+
+      [Fact]
       public void ConversionOperator_HasTimeSpanWithOneParameter_ConvertsComposerToTimeSpanAutomatically()
       {
          const long ticks = 123L;
