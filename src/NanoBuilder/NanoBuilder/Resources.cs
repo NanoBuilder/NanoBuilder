@@ -11,6 +11,9 @@
       private const string _parameterMappingMessage = "No public constructors on type {0} were found to accept a parameter of type {1}";
       public static string ParameterMappingMessage = _parameterMappingMessage;
 
+      private const string _rhinoMocksMapperMessage = "Unable to locate the Rhino.Mocks.MockRepository type. Are you referencing RhinoMocks?";
+      public static string RhinoMocksMapperMessage = _rhinoMocksMapperMessage;
+
       private const string _typeMapperMessage = "Unable to locate Moq.Mock type. Are you referencing Moq?";
       public static string TypeMapperMessage = _typeMapperMessage;
    }
