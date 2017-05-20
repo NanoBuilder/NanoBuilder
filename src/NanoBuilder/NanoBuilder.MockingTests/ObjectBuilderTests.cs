@@ -2,6 +2,7 @@
 using Xunit;
 using FluentAssertions;
 using Moq;
+using NSubstitute.Core;
 using Rhino.Mocks.Interfaces;
 using NanoBuilder.MockingTests.Stubs;
 
@@ -37,6 +38,16 @@ namespace NanoBuilder.MockingTests
             .Build();
 
          logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( IMockedObject ) );
+      }
+
+      [Fact]
+      public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAnNSubstituteMock()
+      {
+         var logger = ObjectBuilder.For<Logger>()
+            .MapInterfacesTo<NSubstituteMapper>()
+            .Build();
+
+         logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( ICallRouter ) );
       }
    }
 }

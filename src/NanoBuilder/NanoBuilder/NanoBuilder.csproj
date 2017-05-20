@@ -52,6 +52,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="IConstructorMatcher.cs" />
     <Compile Include="MapperException.cs" />
+    <Compile Include="NSubstituteMapper.cs" />
     <Compile Include="ParameterComposer.cs" />
     <Compile Include="ITypeInspector.cs" />
     <Compile Include="ITypeMapper.cs" />
