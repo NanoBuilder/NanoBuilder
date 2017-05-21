@@ -48,6 +48,7 @@ Task( "RunUnitTests" )
    var testAssemblies = new[]
    {
       "./src/NanoBuilder/NanoBuilder.Tests/bin/" + Directory( configuration ) + "/NanoBuilder.Tests.dll",
+      "./src/NanoBuilder/NanoBuilder.MockingTests/bin/" + Directory( configuration ) + "/NanoBuilder.MockingTests.dll",
    };
 
    XUnit2( testAssemblies );
