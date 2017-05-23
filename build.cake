@@ -31,7 +31,7 @@ Task( "RestoreNuGetPackages" )
 //===========================================================================
 
 Task( "Build" )
-   .IsDependentOn( "RestoreNuGetPackages")
+   .IsDependentOn( "RestoreNuGetPackages" )
    .Does( () =>
 {
   MSBuild( "./src/NanoBuilder/NanoBuilder.sln", settings => settings.SetConfiguration( configuration ) );
