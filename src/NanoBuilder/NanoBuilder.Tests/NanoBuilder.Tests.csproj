@@ -86,6 +86,7 @@
     <Compile Include="Stubs\IFileSystem.cs" />
     <Compile Include="Stubs\Logger.cs" />
     <Compile Include="Stubs\Vertex.cs" />
+    <Compile Include="TypeInspectorTests.cs" />
     <Compile Include="TypeMapTests.cs" />
   </ItemGroup>
   <ItemGroup>
