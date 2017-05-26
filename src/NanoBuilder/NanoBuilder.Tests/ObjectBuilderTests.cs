@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Reflection;
 using Xunit;
 using FluentAssertions;
 using Moq;
@@ -123,17 +122,6 @@ namespace NanoBuilder.Tests
 
          Mock.Get( fileSystemCache.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
          fileSystemCache.CacheSize.Should().Be( cacheSize );
-      }
-
-      [Fact]
-      public void ConversionOperator_HasTimeSpanWithOneParameter_ConvertsComposerToTimeSpanAutomatically()
-      {
-         const long ticks = 123L;
-
-         TimeSpan timeSpan = ObjectBuilder.For<TimeSpan>()
-            .With( ticks );
-
-         timeSpan.Ticks.Should().Be( ticks );
       }
 
       [Fact]

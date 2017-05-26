@@ -1,14 +1,9 @@
 ﻿using System.Linq;
-using System.Net.Sockets;
 using System.Reflection;
 
 namespace NanoBuilder
 {
-   /// <summary>
-   /// A class that can configure constructor parameters.
-   /// </summary>
-   /// <typeparam name="T">The type of object to build.</typeparam>
-   public class ParameterComposer<T>
+   internal class ParameterComposer<T> : IParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
       private readonly ITypeInspector _typeInspector;
@@ -17,7 +12,7 @@ namespace NanoBuilder
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      internal ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
+      public ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
       {
          _constructors = constructors;
          _typeInspector = typeInspector;
@@ -37,12 +32,7 @@ namespace NanoBuilder
          return instance;
       }
 
-      /// <summary>
-      /// Configures how interface types should be initialized by default. 
-      /// </summary>
-      /// <typeparam name="TMapperType">The type of mapper to transform objects.</typeparam>
-      /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          if ( _interfaceMapper != null )
          {
@@ -56,13 +46,7 @@ namespace NanoBuilder
          return this;
       }
 
-      /// <summary>
-      /// Configures a parameter for the object's constructor.
-      /// </summary>
-      /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
-      /// <param name="instance">The object that is being mapped for the given type.</param>
-      /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> With<TParameterType>( TParameterType instance )
+      public IParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
          var parameterMatches = from c in _constructors
                                 from p in c.GetParameters()
@@ -80,14 +64,7 @@ namespace NanoBuilder
          return this;
       }
 
-      /// <summary>
-      /// Provides a default value for the given type, allowing you to "skip" mapping a
-      /// parameter. This is useful when a constructor accepts multiple parameters of the
-      /// same type, and you want to map some of them (but not all).
-      /// </summary>
-      /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
-      /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> Skip<TParameterType>()
+      public IParameterComposer<T> Skip<TParameterType>()
       {
          TParameterType instance = Default<TParameterType>();
 
@@ -96,10 +73,6 @@ namespace NanoBuilder
          return this;
       }
 
-      /// <summary>
-      /// Creates the instance with the configured constructor parameters.
-      /// </summary>
-      /// <returns>The object instance.</returns>
       public T Build()
       {
          if ( SpecialType.CanAutomaticallyActivate<T>() || !SpecialType.HasConstructors<T>() )
@@ -136,16 +109,5 @@ namespace NanoBuilder
 
          return (T) constructor.Invoke( callingParameters );
       }
-
-      /// <summary>
-      /// Automatically builds the instance from the <see cref="ParameterComposer{T}"/>. Using this
-      /// means a call to Build() is unnecessary.
-      /// </summary>
-      /// <param name="composer">
-      /// The current <see cref="ParameterComposer{T}"/>. This is most useful when
-      /// chaining together method calls.
-      /// </param>
-      public static implicit operator T( ParameterComposer<T> composer )
-         => composer.Build();
    }
 }
