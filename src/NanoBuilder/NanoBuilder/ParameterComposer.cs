@@ -12,9 +12,9 @@ namespace NanoBuilder
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      public ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
+      public ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
       {
-         _constructors = constructors;
+         _constructors = typeInspector.GetConstructors( typeof( T ) );
          _typeInspector = typeInspector;
          _constructorMatcher = constructorMatcher;
       }

@@ -14,9 +14,7 @@
       /// <returns>An ObjectBuilder instance that can build the given type.</returns>
       public static IParameterComposer<T> For<T>()
       {
-         var constructors = typeof( T ).GetConstructors();
-
-         return new ParameterComposer<T>( constructors, new TypeInspector(), new ConstructorMatcher() );
+         return new ParameterComposer<T>( new TypeInspector(), new ConstructorMatcher() );
       }
    }
 }
