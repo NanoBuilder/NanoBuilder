@@ -1,5 +1,7 @@
-﻿using Xunit;
+﻿using System.Linq;
+using Xunit;
 using FluentAssertions;
+using NanoBuilder.Tests.Stubs;
 
 namespace NanoBuilder.Tests
 {
@@ -23,6 +25,18 @@ namespace NanoBuilder.Tests
          var type = typeInspector.GetType( "System.NotAThing" );
 
          type.Should().BeNull();
+      }
+
+      [Fact]
+      public void GetConstructors_PassesTypeWithConstructors_ReturnsConstructors()
+      {
+         var actualConstructors = typeof( Logger ).GetConstructors();
+
+         var typeInspector = new TypeInspector();
+
+         var constructors = typeInspector.GetConstructors( typeof( Logger ) );
+
+         constructors.Should().HaveCount( 1 ).And.Contain( actualConstructors.Single() );
       }
    }
 }
