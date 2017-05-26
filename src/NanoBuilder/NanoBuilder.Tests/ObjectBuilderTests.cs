@@ -126,17 +126,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void ConversionOperator_HasTimeSpanWithOneParameter_ConvertsComposerToTimeSpanAutomatically()
-      {
-         const long ticks = 123L;
-
-         TimeSpan timeSpan = ObjectBuilder.For<TimeSpan>()
-            .With( ticks );
-
-         timeSpan.Ticks.Should().Be( ticks );
-      }
-
-      [Fact]
       public void Skip_SkipsFirstConstructorButMapsSecond_SecondParameterIsSetButNotFirst()
       {
          const int y = 123;

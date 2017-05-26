@@ -7,7 +7,7 @@ namespace NanoBuilder
    /// A class that can configure constructor parameters.
    /// </summary>
    /// <typeparam name="T">The type of object to build.</typeparam>
-   public class ParameterComposer<T> : IParameterComposer<T>
+   internal class ParameterComposer<T> : IParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
       private readonly ITypeInspector _typeInspector;
@@ -16,7 +16,7 @@ namespace NanoBuilder
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      internal ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
+      public ParameterComposer( ConstructorInfo[] constructors, ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
       {
          _constructors = constructors;
          _typeInspector = typeInspector;
@@ -41,7 +41,7 @@ namespace NanoBuilder
       /// </summary>
       /// <typeparam name="TMapperType">The type of mapper to transform objects.</typeparam>
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          if ( _interfaceMapper != null )
          {
@@ -61,7 +61,7 @@ namespace NanoBuilder
       /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
       /// <param name="instance">The object that is being mapped for the given type.</param>
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> With<TParameterType>( TParameterType instance )
+      public IParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
          var parameterMatches = from c in _constructors
                                 from p in c.GetParameters()
@@ -86,7 +86,7 @@ namespace NanoBuilder
       /// </summary>
       /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
       /// <returns>The same <see cref="ParameterComposer{T}"/>.</returns>
-      public ParameterComposer<T> Skip<TParameterType>()
+      public IParameterComposer<T> Skip<TParameterType>()
       {
          TParameterType instance = Default<TParameterType>();
 
@@ -135,16 +135,5 @@ namespace NanoBuilder
 
          return (T) constructor.Invoke( callingParameters );
       }
-
-      /// <summary>
-      /// Automatically builds the instance from the <see cref="ParameterComposer{T}"/>. Using this
-      /// means a call to Build() is unnecessary.
-      /// </summary>
-      /// <param name="composer">
-      /// The current <see cref="ParameterComposer{T}"/>. This is most useful when
-      /// chaining together method calls.
-      /// </param>
-      public static implicit operator T( ParameterComposer<T> composer )
-         => composer.Build();
    }
 }
