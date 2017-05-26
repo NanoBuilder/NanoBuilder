@@ -7,7 +7,7 @@ namespace NanoBuilder
    /// A class that can configure constructor parameters.
    /// </summary>
    /// <typeparam name="T">The type of object to build.</typeparam>
-   public class ParameterComposer<T>
+   public class ParameterComposer<T> : IParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
       private readonly ITypeInspector _typeInspector;
