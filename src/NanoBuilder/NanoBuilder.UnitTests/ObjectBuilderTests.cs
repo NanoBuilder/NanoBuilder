@@ -9,13 +9,6 @@ namespace NanoBuilder.UnitTests
 {
    public class ObjectBuilderTests
    {
-      [Fact]
-      public void Build_BuildingAnInt_ReturnsDefaultInt()
-      {
-         int value = ObjectBuilder.For<int>().Build();
-
-         value.Should().Be( default( int ) );
-      }
 
       [Fact]
       public void Build_BuildingAString_ReturnsDefaultString()
