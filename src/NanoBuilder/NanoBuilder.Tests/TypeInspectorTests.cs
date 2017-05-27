@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Xunit;
 using FluentAssertions;
-using NanoBuilder.Tests.Stubs;
+using NanoBuilder.Stubs;
 
 namespace NanoBuilder.Tests
 {

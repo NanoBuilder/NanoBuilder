@@ -2,7 +2,7 @@
 using Xunit;
 using FluentAssertions;
 using Moq;
-using NanoBuilder.Tests.Stubs;
+using NanoBuilder.Stubs;
 
 namespace NanoBuilder.Tests
 {

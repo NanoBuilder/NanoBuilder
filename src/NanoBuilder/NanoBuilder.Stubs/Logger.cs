@@ -1,6 +1,6 @@
 ﻿namespace NanoBuilder.Stubs
 {
-   internal class Logger
+   public class Logger
    {
       public IFileSystem FileSystem
       {

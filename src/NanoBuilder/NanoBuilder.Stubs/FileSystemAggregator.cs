@@ -1,6 +1,6 @@
 ﻿namespace NanoBuilder.Stubs
 {
-   internal class FileSystemAggregator
+   public class FileSystemAggregator
    {
       public IFileSystem FileSystem
       {

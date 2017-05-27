@@ -1,6 +1,6 @@
 ﻿namespace NanoBuilder.Stubs
 {
-   internal class FileSystemCache
+   public class FileSystemCache
    {
       public IFileSystem FileSystem
       {

@@ -29,6 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>NanoBuilder.Stubs.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +59,9 @@
       <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
       <Name>NanoBuilder</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanoBuilder.Stubs.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

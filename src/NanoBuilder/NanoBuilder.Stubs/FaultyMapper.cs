@@ -2,7 +2,7 @@
 
 namespace NanoBuilder.Stubs
 {
-   internal class FaultyMapper : ITypeMapper
+   public class FaultyMapper : ITypeMapper
    {
       public object CreateForInterface( Type type )
       {
