@@ -14,7 +14,11 @@
       /// <returns>An ObjectBuilder instance that can build the given type.</returns>
       public static IParameterComposer<T> For<T>()
       {
-         return new ParameterComposer<T>( new TypeInspector(), new ConstructorMatcher() );
+         var typeInspector = new TypeInspector();
+         var constructorMatcher = new ConstructorMatcher();
+         var mapperFactory = new MapperFactory( typeInspector );
+
+         return new ParameterComposer<T>( typeInspector, constructorMatcher, mapperFactory );
       }
    }
 }

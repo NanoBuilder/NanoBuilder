@@ -61,8 +61,11 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FakeItEasyMapper.cs" />
     <Compile Include="IConstructorMatcher.cs" />
+    <Compile Include="IMapperFactory.cs" />
     <Compile Include="IParameterComposer.cs" />
     <Compile Include="MapperException.cs" />
+    <Compile Include="MapperFactory.cs" />
+    <Compile Include="NanoBuilderException.cs" />
     <Compile Include="NSubstituteMapper.cs" />
     <Compile Include="ParameterComposer.cs" />
     <Compile Include="ITypeInspector.cs" />

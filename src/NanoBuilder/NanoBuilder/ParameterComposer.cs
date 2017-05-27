@@ -8,16 +8,20 @@ namespace NanoBuilder
       private readonly ConstructorInfo[] _constructors;
       private readonly ITypeInspector _typeInspector;
       private readonly IConstructorMatcher _constructorMatcher;
+      private readonly IMapperFactory _mapperFactory;
 
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      public ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher )
+      public ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
       {
          _constructors = typeInspector.GetConstructors( typeof( T ) );
          _typeInspector = typeInspector;
          _constructorMatcher = constructorMatcher;
+         _mapperFactory = mapperFactory;
       }
+
+      private bool HasSetInterfaceMapper() => _interfaceMapper != null;
 
       private TParameterType Default<TParameterType>()
       {
@@ -34,14 +38,12 @@ namespace NanoBuilder
 
       public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
-         if ( _interfaceMapper != null )
+         if ( HasSetInterfaceMapper() )
          {
             throw new MapperException( Resources.MapperMessage );
          }
 
-         var constructor = typeof( TMapperType ).GetConstructors( BindingFlags.NonPublic | BindingFlags.Instance ).Single();
-
-         _interfaceMapper = (ITypeMapper) constructor.Invoke( new object[] { _typeInspector } );
+         _interfaceMapper = _mapperFactory.Create<TMapperType>();
 
          return this;
       }
