@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using FluentAssertions;
 
-namespace NanoBuilder.Tests
+namespace NanoBuilder.UnitTests
 {
    public class EnumerableExtensionsTests
    {

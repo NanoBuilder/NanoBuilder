@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NanoBuilder.Tests")]
+[assembly: AssemblyTitle( "NanoBuilder.UnitTests" )]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NanoBuilder.Tests")]
+[assembly: AssemblyProduct( "NanoBuilder.UnitTests" )]
 [assembly: AssemblyCopyright( "Copyright © Alex Novak 2017. All rights reserved." )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

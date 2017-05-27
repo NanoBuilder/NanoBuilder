@@ -1,7 +1,7 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Xunit;
 
-namespace NanoBuilder.Tests
+namespace NanoBuilder.UnitTests
 {
    public class TypeMapTests
    {

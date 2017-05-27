@@ -1,21 +1,21 @@
 ﻿using System;
-using Xunit;
 using FluentAssertions;
 using Moq;
+using Xunit;
 
-namespace NanoBuilder.Tests
+namespace NanoBuilder.UnitTests
 {
-   public class NSubstituteMapperTests
+   public class RhinoMocksMapperTests
    {
       [Fact]
-      public void CreateForInstance_NSubstituteAssemblyNotPresent_ThrowsTypeMapperException()
+      public void CreateForInstance_RhinoMocksAssemblyNotPresent_ThrowsTypeMapperException()
       {
-         const string mockType = "NSubstitute.Substitute,NSubstitute";
+         const string mockType = "Rhino.Mocks.MockRepository,Rhino.Mocks";
 
          var typeInspectorMock = new Mock<ITypeInspector>();
          typeInspectorMock.Setup( ti => ti.GetType( mockType ) ).Returns<Type>( null );
 
-         var mapper = new NSubstituteMapper( typeInspectorMock.Object );
+         var mapper = new RhinoMocksMapper( typeInspectorMock.Object );
          Action createForInstance = () => mapper.CreateForInterface( typeof( int ) );
 
          createForInstance.ShouldThrow<TypeMapperException>();

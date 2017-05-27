@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Xunit;
 using FluentAssertions;
 using NanoBuilder.Stubs;
+using Xunit;
 
-namespace NanoBuilder.Tests
+namespace NanoBuilder.UnitTests
 {
    public class TypeInspectorTests
    {
