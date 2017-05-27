@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		NanoBuilder\NanoBuilder.nuspec = NanoBuilder\NanoBuilder.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.MockingTests", "NanoBuilder.MockingTests\NanoBuilder.MockingTests.csproj", "{353F62A0-F52E-4333-83CC-FDB4837D40D7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.AcceptanceTests", "NanoBuilder.AcceptanceTests\NanoBuilder.AcceptanceTests.csproj", "{7082CF39-268E-4F8C-85F3-79366DAE6790}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.Stubs", "NanoBuilder.Stubs\NanoBuilder.Stubs.csproj", "{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}"
@@ -32,10 +30,6 @@ Global
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Release|Any CPU.Build.0 = Release|Any CPU
-		{353F62A0-F52E-4333-83CC-FDB4837D40D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{353F62A0-F52E-4333-83CC-FDB4837D40D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{353F62A0-F52E-4333-83CC-FDB4837D40D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{353F62A0-F52E-4333-83CC-FDB4837D40D7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7082CF39-268E-4F8C-85F3-79366DAE6790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7082CF39-268E-4F8C-85F3-79366DAE6790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7082CF39-268E-4F8C-85F3-79366DAE6790}.Release|Any CPU.ActiveCfg = Release|Any CPU
