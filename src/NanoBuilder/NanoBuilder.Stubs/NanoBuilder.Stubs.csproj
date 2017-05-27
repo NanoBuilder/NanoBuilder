@@ -40,7 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FaultyMapper.cs" />
+    <Compile Include="FileSystemAggregator.cs" />
+    <Compile Include="FileSystemCache.cs" />
+    <Compile Include="IFileSystem.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vertex.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
+      <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
+      <Name>NanoBuilder</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
