@@ -8,7 +8,7 @@ namespace NanoBuilder.Tests
    public class ParameterComposerTests
    {
       [Fact]
-      public void Create_PassesMoqMapper_UsesFactoryToCreateMapper()
+      public void MapInterfacesTo_PassesMoqMapper_UsesFactoryToCreateMapper()
       {
          // Arrange
 
