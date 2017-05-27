@@ -28,27 +28,6 @@ namespace NanoBuilder.Tests
       }
 
       [Fact]
-      public void MapInterfacesTo_SetsMapperTwice_ThrowsMapperException()
-      {
-         // Arrange
-
-         var typeMapperMock = new Mock<ITypeMapper>();
-
-         var typeInspectorMock = new Mock<ITypeInspector>();
-         var mapperFactoryMock = new Mock<IMapperFactory>();
-         mapperFactoryMock.Setup( mf => mf.Create<ITypeMapper>() ).Returns( typeMapperMock.Object );
-
-         // Act
-
-         var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object );
-
-         parameterComposer.MapInterfacesTo<ITypeMapper>();
-         Action map = () => parameterComposer.MapInterfacesTo<ITypeMapper>();
-
-         map.ShouldThrow<MapperException>();
-      }
-
-      [Fact]
       public void With_PassesMockInsteadOfMockObject_ThrowsWithHelpfulMessage()
       {
          // Arrange
