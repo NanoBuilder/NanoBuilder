@@ -5,7 +5,7 @@ namespace NanoBuilder
    /// <summary>
    /// Represents an object that can map one kind of Type to another.
    /// <remarks>
-   /// This is used by the <see cref="ParameterComposer{T}"/> class when transforming constructor
+   /// This is used by the <see cref="FullParameterComposer{T}"/> class when transforming constructor
    /// parameter types into other types. For example, mapping all interfaces into mock versions of
    /// the interface.
    /// </remarks>

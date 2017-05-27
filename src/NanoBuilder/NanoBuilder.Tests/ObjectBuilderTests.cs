@@ -14,7 +14,7 @@ namespace NanoBuilder.Tests
       {
          var builder = ObjectBuilder.For<string>();
 
-         builder.Should().BeOfType<ParameterComposer<string>>();
+         builder.Should().BeOfType<FullParameterComposer<string>>();
       }
 
       [Fact]

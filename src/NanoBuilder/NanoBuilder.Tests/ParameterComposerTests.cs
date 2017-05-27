@@ -18,7 +18,7 @@ namespace NanoBuilder.Tests
 
          // Act
 
-         var parameterComposer = new ParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object );
+         var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object );
 
          parameterComposer.MapInterfacesTo<MoqMapper>();
          
@@ -40,7 +40,7 @@ namespace NanoBuilder.Tests
 
          // Act
 
-         var parameterComposer = new ParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object );
+         var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object );
 
          parameterComposer.MapInterfacesTo<ITypeMapper>();
          Action map = () => parameterComposer.MapInterfacesTo<ITypeMapper>();
@@ -59,7 +59,7 @@ namespace NanoBuilder.Tests
 
          var fileSystemMock = new Mock<IFileSystem>();
 
-         var parameterComposer = new ParameterComposer<Logger>( typeInspectorMock.Object, null, null );
+         var parameterComposer = new FullParameterComposer<Logger>( typeInspectorMock.Object, null, null );
 
          Action with = () => parameterComposer.With( fileSystemMock );
 
