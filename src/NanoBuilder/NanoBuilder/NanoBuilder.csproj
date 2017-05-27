@@ -65,6 +65,7 @@
     <Compile Include="IParameterComposer.cs" />
     <Compile Include="MapperException.cs" />
     <Compile Include="MapperFactory.cs" />
+    <Compile Include="NanoBuilderException.cs" />
     <Compile Include="NSubstituteMapper.cs" />
     <Compile Include="ParameterComposer.cs" />
     <Compile Include="ITypeInspector.cs" />
