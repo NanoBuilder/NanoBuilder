@@ -3,8 +3,8 @@ using FluentAssertions;
 using Moq;
 using NSubstitute.Core;
 using Rhino.Mocks.Interfaces;
-using NanoBuilder.Stubs;
 using FakeItEasy.Creation;
+using NanoBuilder.Stubs;
 
 namespace NanoBuilder.AcceptanceTests
 {
