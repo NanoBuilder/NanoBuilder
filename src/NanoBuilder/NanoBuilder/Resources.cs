@@ -1,4 +1,6 @@
-﻿namespace NanoBuilder
+﻿using System;
+
+namespace NanoBuilder
 {
    internal static class Resources
    {
@@ -15,6 +17,8 @@
       public const string NSubstituteMapperMessage = "Unable to locate NSubstitute.Substitute type. Are you referencing NSubstitute?";
 
       public const string ParameterMappingMessage = "No public constructors on type {0} were found to accept a parameter of type {1}";
+
+      public const string ParameterMappingWithMockMessage = "No public constructors on type {0} accept a Mock instance. Did you mean to pass the Mock.Object?";
 
       public const string RhinoMocksMapperMessage = "Unable to locate the Rhino.Mocks.MockRepository type. Are you referencing RhinoMocks?";
    }

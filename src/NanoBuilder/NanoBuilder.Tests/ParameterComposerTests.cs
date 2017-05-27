@@ -2,13 +2,14 @@
 using Xunit;
 using FluentAssertions;
 using Moq;
+using NanoBuilder.Tests.Stubs;
 
 namespace NanoBuilder.Tests
 {
    public class ParameterComposerTests
    {
       [Fact]
-      public void Create_PassesMoqMapper_UsesFactoryToCreateMapper()
+      public void MapInterfacesTo_PassesMoqMapper_UsesFactoryToCreateMapper()
       {
          // Arrange
 
@@ -45,6 +46,27 @@ namespace NanoBuilder.Tests
          Action map = () => parameterComposer.MapInterfacesTo<ITypeMapper>();
 
          map.ShouldThrow<MapperException>();
+      }
+
+      [Fact]
+      public void With_PassesMockInsteadOfMockObject_ThrowsWithHelpfulMessage()
+      {
+         // Arrange
+
+         var typeInspectorMock = new Mock<ITypeInspector>();
+
+         // Act
+
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var parameterComposer = new ParameterComposer<Logger>( typeInspectorMock.Object, null, null );
+
+         Action with = () => parameterComposer.With( fileSystemMock );
+
+         // Assert
+
+         string message = Resources.ParameterMappingWithMockMessage.Replace( "{0}", "*" );
+         with.ShouldThrow<ParameterMappingException>().And.Message.Should().Match( message );
       }
    }
 }
