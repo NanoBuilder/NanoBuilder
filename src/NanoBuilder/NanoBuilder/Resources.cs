@@ -8,8 +8,6 @@ namespace NanoBuilder
 
       public const string FakeItEasyMessage = "Unable to locate FakeItEasy.A type. Are you referencing FakeItEasy?";
 
-      public const string MapperMessage = "The interface mapper can only be set once. Did you call MapInterfacesTo() more than once?";
-
       public const string MoqMapperMessage = "Unable to locate Moq.Mock type. Are you referencing Moq?";
 
       public const string NanoBuilderMessage = "An exception was thrown inside NanoBuilder. This is likely from an unsupported scenario--see inner exception for details";

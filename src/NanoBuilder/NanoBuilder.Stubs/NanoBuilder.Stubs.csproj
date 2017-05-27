@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}</ProjectGuid>
+    <ProjectGuid>{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoBuilder</RootNamespace>
-    <AssemblyName>NanoBuilder</AssemblyName>
+    <RootNamespace>NanoBuilder.Stubs</RootNamespace>
+    <AssemblyName>NanoBuilder.Stubs</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,8 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,24 +28,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\NanoBuilder.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>NanoBuilder.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>NanoBuilder.Stubs.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,38 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmbiguousConstructorException.cs" />
-    <Compile Include="ConstructorMatcher.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="FakeItEasyMapper.cs" />
-    <Compile Include="IConstructorMatcher.cs" />
-    <Compile Include="IMappedInterfaceConstraint.cs" />
-    <Compile Include="IMapperFactory.cs" />
-    <Compile Include="IFullParameterComposer.cs" />
-    <Compile Include="IParameterComposer.cs" />
-    <Compile Include="MapperException.cs" />
-    <Compile Include="MapperFactory.cs" />
-    <Compile Include="NanoBuilderException.cs" />
-    <Compile Include="NSubstituteMapper.cs" />
-    <Compile Include="ParameterComposer.cs" />
-    <Compile Include="ITypeInspector.cs" />
-    <Compile Include="ITypeMapper.cs" />
-    <Compile Include="MoqMapper.cs" />
-    <Compile Include="ObjectBuilder.cs" />
-    <Compile Include="ParameterMappingException.cs" />
+    <Compile Include="FaultyMapper.cs" />
+    <Compile Include="FileSystemAggregator.cs" />
+    <Compile Include="FileSystemCache.cs" />
+    <Compile Include="IFileSystem.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.cs" />
-    <Compile Include="RhinoMocksMapper.cs" />
-    <Compile Include="SpecialType.cs" />
-    <Compile Include="TypeInspector.cs">
-      <DependentUpon>ITypeInspector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TypeMap.cs" />
-    <Compile Include="TypeMapperException.cs" />
+    <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NanoBuilder.snk" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
+      <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
+      <Name>NanoBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanoBuilder.Stubs.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NanoBuilder
 {
-   internal class ParameterComposer<T> : IParameterComposer<T>
+   internal class FullParameterComposer<T> : IFullParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
       private readonly IConstructorMatcher _constructorMatcher;
@@ -12,14 +12,12 @@ namespace NanoBuilder
       private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      public ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
+      public FullParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
       {
          _constructors = typeInspector.GetConstructors( typeof( T ) );
          _constructorMatcher = constructorMatcher;
          _mapperFactory = mapperFactory;
       }
-
-      private bool HasSetInterfaceMapper() => _interfaceMapper != null;
 
       private TParameterType Default<TParameterType>()
       {
@@ -36,17 +34,12 @@ namespace NanoBuilder
 
       public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
-         if ( HasSetInterfaceMapper() )
-         {
-            throw new MapperException( Resources.MapperMessage );
-         }
-
          _interfaceMapper = _mapperFactory.Create<TMapperType>();
 
          return this;
       }
 
-      public IParameterComposer<T> With<TParameterType>( TParameterType instance )
+      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
          var parameterMatches = from c in _constructors
                                 from p in c.GetParameters()
@@ -74,7 +67,7 @@ namespace NanoBuilder
          return this;
       }
 
-      public IParameterComposer<T> Skip<TParameterType>()
+      public IFullParameterComposer<T> Skip<TParameterType>()
       {
          TParameterType instance = Default<TParameterType>();
 

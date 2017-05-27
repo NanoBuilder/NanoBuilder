@@ -12,13 +12,13 @@
       /// </summary>
       /// <typeparam name="T">The type of object to build.</typeparam>
       /// <returns>An ObjectBuilder instance that can build the given type.</returns>
-      public static IParameterComposer<T> For<T>()
+      public static IFullParameterComposer<T> For<T>()
       {
          var typeInspector = new TypeInspector();
          var constructorMatcher = new ConstructorMatcher();
          var mapperFactory = new MapperFactory( typeInspector );
 
-         return new ParameterComposer<T>( typeInspector, constructorMatcher, mapperFactory );
+         return new FullParameterComposer<T>( typeInspector, constructorMatcher, mapperFactory );
       }
    }
 }
