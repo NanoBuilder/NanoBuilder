@@ -1,22 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using Xunit;
 using FluentAssertions;
 using Moq;
 using NanoBuilder.Stubs;
-using Xunit;
 
 namespace NanoBuilder.UnitTests
 {
    public class ObjectBuilderTests
    {
-      [Fact]
-      public void Build_BuildingAnObject_ReturnsBuilderForThatType()
-      {
-         var builder = ObjectBuilder.For<string>();
-
-         builder.Should().BeOfType<FullParameterComposer<string>>();
-      }
-
       [Fact]
       public void Build_BuildingAnInt_ReturnsDefaultInt()
       {
