@@ -83,6 +83,8 @@
     <Compile Include="BuildMappingParameterScenarios.cs" />
     <Compile Include="BuildPrimitiveScenarios.cs" />
     <Compile Include="MapInterfacesScenarios.cs" />
+    <Compile Include="MappingErrorScenarios.cs" />
+    <Compile Include="ParameterSkippingScenarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using Xunit;
+﻿using Xunit;
 using FluentAssertions;
 using Moq;
 using NanoBuilder.Stubs;
 
-namespace NanoBuilder.UnitTests
+namespace NanoBuilder.AcceptanceTests
 {
-   public class ObjectBuilderTests
+   public class ParameterSkippingScenarios
    {
       [Fact]
-      public void Skip_SkipsFirstConstructorButMapsSecond_SecondParameterIsSetButNotFirst()
+      public void SkippingTheFirstButMappingTheSecondIntParameterWillSetTheSecond()
       {
          const int y = 123;
 
@@ -24,7 +22,7 @@ namespace NanoBuilder.UnitTests
       }
 
       [Fact]
-      public void Skip_SkipsFirstConstructorButMapsSecondWithMoqMapper_SecondParameterIsSetToMockType()
+      public void SkippingAnInterfaceButSettingTheSecondWillDefaultTheFirstToTheRightMockType()
       {
          var fileSystemMock = new Mock<IFileSystem>();
 
@@ -36,14 +34,6 @@ namespace NanoBuilder.UnitTests
 
          Mock.Get( fileSystemAggregator.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
          fileSystemAggregator.FileSystem2.Should().Be( fileSystemMock.Object );
-      }
-
-      [Fact]
-      public void With_NoConstructorAcceptsTheParameterType_ThrowsParameterMappingException()
-      {
-         Action with = () => ObjectBuilder.For<Version>().With( 100.0 );
-
-         with.ShouldThrow<ParameterMappingException>();
       }
    }
 }
