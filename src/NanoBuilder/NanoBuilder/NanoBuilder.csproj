@@ -61,6 +61,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FakeItEasyMapper.cs" />
     <Compile Include="IConstructorMatcher.cs" />
+    <Compile Include="IMappedInterfaceConstraint.cs" />
     <Compile Include="IMapperFactory.cs" />
     <Compile Include="IParameterComposer.cs" />
     <Compile Include="MapperException.cs" />
