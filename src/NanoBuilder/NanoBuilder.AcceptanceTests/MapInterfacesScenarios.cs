@@ -5,7 +5,7 @@ using NanoBuilder.Stubs;
 
 namespace NanoBuilder.AcceptanceTests
 {
-   public class MapInterfacesScenario
+   public class MapInterfacesScenarios
    {
       [Fact]
       public void CanMapInterfacesAndThenStillMapParameters()
