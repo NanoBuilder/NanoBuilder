@@ -1,8 +1,8 @@
 ﻿using System;
+using Xunit;
 using FluentAssertions;
 using Moq;
 using NanoBuilder.Stubs;
-using Xunit;
 
 namespace NanoBuilder.UnitTests
 {
