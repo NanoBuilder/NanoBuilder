@@ -19,6 +19,8 @@ namespace NanoBuilder
          _constructorMatcher = constructorMatcher;
       }
 
+      private bool HasSetInterfaceMapper() => _interfaceMapper != null;
+
       private TParameterType Default<TParameterType>()
       {
          var type = typeof( TParameterType );
@@ -34,7 +36,7 @@ namespace NanoBuilder
 
       public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
-         if ( _interfaceMapper != null )
+         if ( HasSetInterfaceMapper() )
          {
             throw new MapperException( Resources.MapperMessage );
          }
