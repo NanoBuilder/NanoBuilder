@@ -12,16 +12,6 @@ namespace NanoBuilder.MockingTests
    public class ObjectBuilderTests
    {
       [Fact]
-      public void MapInterfacesTo_MultipleMappersAreUsed_ThrowsMapperException()
-      {
-         Action mapInterfacesTo = () => ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<MoqMapper>()
-            .MapInterfacesTo<RhinoMocksMapper>();
-
-         mapInterfacesTo.ShouldThrow<MapperException>();
-      }
-
-      [Fact]
       public void Build_OmitsInterfaceParameter_OmittedInterfaceBecomesAMoqOfThatInterface()
       {
          var logger = ObjectBuilder.For<Logger>()

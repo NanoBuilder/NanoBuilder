@@ -34,7 +34,7 @@ namespace NanoBuilder
          return instance;
       }
 
-      public IFullParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          if ( HasSetInterfaceMapper() )
          {
