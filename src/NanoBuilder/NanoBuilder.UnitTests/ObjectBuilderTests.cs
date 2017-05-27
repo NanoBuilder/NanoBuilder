@@ -11,61 +11,6 @@ namespace NanoBuilder.UnitTests
    {
 
       [Fact]
-      public void Build_BuildingAString_ReturnsDefaultString()
-      {
-         string value = ObjectBuilder.For<string>().Build();
-
-         value.Should().Be( default( string ) );
-      }
-
-      [Fact]
-      public void Build_BuildingAGuidWithParameter_ReturnsTheConstructedObject()
-      {
-         const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
-
-         var guid = ObjectBuilder.For<Guid>()
-            .With( guidString )
-            .Build();
-
-         guid.ToString().Should().Be( guidString );
-      }
-
-      [Fact]
-      public void Build_LeavesOneParameterUnmapped_UnmappedParameterIsDefaultValue()
-      {
-         var eventArgs = ObjectBuilder.For<ProgressChangedEventArgs>()
-            .With( 80 )
-            .Build();
-
-         eventArgs.UserState.Should().Be( default( object ) );
-      }
-
-      [Fact]
-      public void Build_BuildingAnExceptionWithComplexConstructor_ReturnsTheConstructedObject()
-      {
-         var innerException = new OverflowException();
-
-         var exception = ObjectBuilder.For<Exception>()
-            .With<Exception>( innerException )
-            .Build();
-
-         exception.InnerException.Should().Be( innerException );
-      }
-
-      [Fact]
-      public void Build_BuildsVertexThatTakesTwoIntsButPassesOne_OnlyTheFirstIntIsUsed()
-      {
-         const int value = 5;
-
-         var vertex = ObjectBuilder.For<Vertex>()
-            .With( value )
-            .Build();
-
-         vertex.X.Should().Be( value );
-         vertex.Y.Should().Be( default( int ) );
-      }
-
-      [Fact]
       public void Build_ParameterIsAnInterface_InterfaceIsSetToTheMock()
       {
          var fileSystemMock = new Mock<IFileSystem>();
