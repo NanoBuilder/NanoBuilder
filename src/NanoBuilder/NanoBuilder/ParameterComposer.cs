@@ -6,7 +6,6 @@ namespace NanoBuilder
    internal class ParameterComposer<T> : IParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
-      private readonly ITypeInspector _typeInspector;
       private readonly IConstructorMatcher _constructorMatcher;
       private readonly IMapperFactory _mapperFactory;
 
@@ -16,7 +15,6 @@ namespace NanoBuilder
       public ParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
       {
          _constructors = typeInspector.GetConstructors( typeof( T ) );
-         _typeInspector = typeInspector;
          _constructorMatcher = constructorMatcher;
          _mapperFactory = mapperFactory;
       }
