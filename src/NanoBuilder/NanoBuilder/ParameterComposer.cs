@@ -57,7 +57,17 @@ namespace NanoBuilder
 
          if ( !parameterMatches.Any() )
          {
-            string message = string.Format( Resources.ParameterMappingMessage, typeof( T ), typeof( TParameterType ) );
+            string message;
+
+            if ( instance.GetType().Name == "Mock`1" )
+            {
+               message = string.Format( Resources.ParameterMappingWithMockMessage, typeof( T ) );
+            }
+            else
+            {
+               message = string.Format( Resources.ParameterMappingMessage, typeof( T ), typeof( TParameterType ) );
+            }
+
             throw new ParameterMappingException( message );
          }
 
