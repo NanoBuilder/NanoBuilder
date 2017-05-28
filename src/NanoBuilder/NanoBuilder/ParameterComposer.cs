@@ -78,7 +78,7 @@ namespace NanoBuilder
 
       public T Build()
       {
-         if ( SpecialType.CanAutomaticallyActivate<T>() || !SpecialType.HasConstructors<T>() )
+         if ( SpecialType.CanAutomaticallyActivate<T>() || !_constructors.Any() )
          {
             return Default<T>();
          }
