@@ -4,7 +4,7 @@
    {
       public T Default<T>()
       {
-         throw new System.NotImplementedException();
+         return default( T );
       }
    }
 }
