@@ -1,5 +1,7 @@
 ﻿using Xunit;
 using FluentAssertions;
+using Moq;
+using NanoBuilder.Stubs;
 
 namespace NanoBuilder.UnitTests
 {
@@ -23,6 +25,24 @@ namespace NanoBuilder.UnitTests
          var interfaceValue = typeActivator.Default<ITypeInspector>();
 
          interfaceValue.Should().BeNull();
+      }
+
+      [Fact]
+      public void Default_HasInterfaceMapper_MapsInterfaceWithMapper()
+      {
+         var fileSystemMock = new Mock<IFileSystem>();
+
+         var typeMapperMock = new Mock<ITypeMapper>();
+         typeMapperMock.Setup( tm => tm.CreateForInterface( typeof( IFileSystem ) ) ).Returns( fileSystemMock.Object );
+
+         var typeActivator = new TypeActivator
+         {
+            TypeMapper = typeMapperMock.Object
+         };
+
+         var fileSystem = typeActivator.Default<IFileSystem>();
+
+         Mock.Get( fileSystem ).Should().Be( fileSystemMock );
       }
    }
 }
