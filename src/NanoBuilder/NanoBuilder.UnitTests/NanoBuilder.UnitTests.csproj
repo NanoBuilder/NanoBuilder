@@ -82,6 +82,7 @@
     <Compile Include="ParameterComposerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RhinoMocksMapperTests.cs" />
+    <Compile Include="TypeActivatorTests.cs" />
     <Compile Include="TypeInspectorTests.cs" />
     <Compile Include="TypeMapTests.cs" />
   </ItemGroup>

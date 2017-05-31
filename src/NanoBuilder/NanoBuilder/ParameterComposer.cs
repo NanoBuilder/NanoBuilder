@@ -8,33 +8,29 @@ namespace NanoBuilder
       private readonly ConstructorInfo[] _constructors;
       private readonly IConstructorMatcher _constructorMatcher;
       private readonly IMapperFactory _mapperFactory;
+      private readonly ITypeActivator _typeActivator;
+      private readonly ITypeMap _typeMap;
 
-      private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      public FullParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
+      public FullParameterComposer( ITypeInspector typeInspector,
+         IConstructorMatcher constructorMatcher,
+         IMapperFactory mapperFactory,
+         ITypeActivator typeActivator,
+         ITypeMap typeMap )
       {
          _constructors = typeInspector.GetConstructors( typeof( T ) );
          _constructorMatcher = constructorMatcher;
          _mapperFactory = mapperFactory;
-      }
-
-      private TParameterType Default<TParameterType>()
-      {
-         var type = typeof( TParameterType );
-         TParameterType instance = default( TParameterType );
-
-         if ( type.IsInterface && _interfaceMapper != null )
-         {
-            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
-         }
-
-         return instance;
+         _typeActivator = typeActivator;
+         _typeMap = typeMap;
       }
 
       public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          _interfaceMapper = _mapperFactory.Create<TMapperType>();
+
+         _typeActivator.TypeMapper = _interfaceMapper;
 
          return this;
       }
@@ -69,7 +65,7 @@ namespace NanoBuilder
 
       public IFullParameterComposer<T> Skip<TParameterType>()
       {
-         TParameterType instance = Default<TParameterType>();
+         TParameterType instance = _typeActivator.Default<TParameterType>();
 
          _typeMap.Add( instance );
 
@@ -78,9 +74,9 @@ namespace NanoBuilder
 
       public T Build()
       {
-         if ( SpecialType.CanAutomaticallyActivate<T>() || !SpecialType.HasConstructors<T>() )
+         if ( SpecialType.CanAutomaticallyActivate<T>() || !_constructors.Any() )
          {
-            return Default<T>();
+            return _typeActivator.Default<T>();
          }
 
          var allMappedTypes = _typeMap.Flatten();

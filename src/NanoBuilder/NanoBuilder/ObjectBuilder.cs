@@ -17,8 +17,14 @@
          var typeInspector = new TypeInspector();
          var constructorMatcher = new ConstructorMatcher();
          var mapperFactory = new MapperFactory( typeInspector );
+         var typeActivator = new TypeActivator();
+         var typeMap = new TypeMap();
 
-         return new FullParameterComposer<T>( typeInspector, constructorMatcher, mapperFactory );
+         return new FullParameterComposer<T>( typeInspector,
+            constructorMatcher,
+            mapperFactory,
+            typeActivator,
+            typeMap );
       }
    }
 }

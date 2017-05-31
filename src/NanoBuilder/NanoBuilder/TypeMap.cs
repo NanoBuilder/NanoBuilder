@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NanoBuilder
 {
-   internal class TypeMap
+   internal class TypeMap : ITypeMap
    {
       private readonly Dictionary<Type, Queue<object>> _mappings = new Dictionary<Type, Queue<object>>();
 
