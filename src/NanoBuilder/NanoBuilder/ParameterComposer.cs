@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -8,15 +9,22 @@ namespace NanoBuilder
       private readonly ConstructorInfo[] _constructors;
       private readonly IConstructorMatcher _constructorMatcher;
       private readonly IMapperFactory _mapperFactory;
+      private readonly ITypeActivator _typeActivator;
+      private readonly ITypeMap _typeMap;
 
-      private readonly TypeMap _typeMap = new TypeMap();
       private ITypeMapper _interfaceMapper;
 
-      public FullParameterComposer( ITypeInspector typeInspector, IConstructorMatcher constructorMatcher, IMapperFactory mapperFactory )
+      public FullParameterComposer( ITypeInspector typeInspector,
+         IConstructorMatcher constructorMatcher,
+         IMapperFactory mapperFactory,
+         ITypeActivator typeActivator,
+         ITypeMap typeMap )
       {
          _constructors = typeInspector.GetConstructors( typeof( T ) );
          _constructorMatcher = constructorMatcher;
          _mapperFactory = mapperFactory;
+         _typeActivator = typeActivator;
+         _typeMap = typeMap;
       }
 
       private TParameterType Default<TParameterType>()
@@ -69,7 +77,7 @@ namespace NanoBuilder
 
       public IFullParameterComposer<T> Skip<TParameterType>()
       {
-         TParameterType instance = Default<TParameterType>();
+         TParameterType instance = _typeActivator.Default<TParameterType>();
 
          _typeMap.Add( instance );
 
