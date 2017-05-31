@@ -72,5 +72,25 @@ namespace NanoBuilder.UnitTests
 
          typeMapMock.Verify( tm => tm.Add( skipObject ), Times.Once() );
       }
+
+      [Fact]
+      public void Skip_DoesntMatterWhatItSkips_ReturnsItself()
+      {
+         // Arrange
+
+         var typeInspectorMock = new Mock<ITypeInspector>();
+         var typeActivatorMock = new Mock<ITypeActivator>();
+         var typeMapMock = new Mock<ITypeMap>();
+
+         // Act
+
+         var composer = new FullParameterComposer<Logger>( typeInspectorMock.Object, null, null, typeActivatorMock.Object, typeMapMock.Object );
+
+         var returnedComposer = composer.Skip<object>();
+
+         // Assert
+
+         returnedComposer.Should().Be( composer );
+      }
    }
 }
