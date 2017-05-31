@@ -15,10 +15,11 @@ namespace NanoBuilder.UnitTests
 
          var typeInspectorMock = new Mock<ITypeInspector>();
          var mapperFactoryMock = new Mock<IMapperFactory>();
+         var typeActivatorMock = new Mock<ITypeActivator>();
 
          // Act
 
-         var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object, null, null );
+         var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object, typeActivatorMock.Object, null );
 
          parameterComposer.MapInterfacesTo<MoqMapper>();
          

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -27,22 +26,11 @@ namespace NanoBuilder
          _typeMap = typeMap;
       }
 
-      private TParameterType Default<TParameterType>()
-      {
-         var type = typeof( TParameterType );
-         TParameterType instance = default( TParameterType );
-
-         if ( type.IsInterface && _interfaceMapper != null )
-         {
-            instance = (TParameterType) _interfaceMapper.CreateForInterface( typeof( TParameterType ) );
-         }
-
-         return instance;
-      }
-
       public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
       {
          _interfaceMapper = _mapperFactory.Create<TMapperType>();
+
+         _typeActivator.TypeMapper = _interfaceMapper;
 
          return this;
       }
@@ -88,7 +76,7 @@ namespace NanoBuilder
       {
          if ( SpecialType.CanAutomaticallyActivate<T>() || !_constructors.Any() )
          {
-            return Default<T>();
+            return _typeActivator.Default<T>();
          }
 
          var allMappedTypes = _typeMap.Flatten();
