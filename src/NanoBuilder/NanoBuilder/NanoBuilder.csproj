@@ -81,12 +81,8 @@
     <Compile Include="Resources.cs" />
     <Compile Include="RhinoMocksMapper.cs" />
     <Compile Include="SpecialType.cs" />
-    <Compile Include="TypeActivator.cs">
-      <DependentUpon>ITypeActivator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TypeInspector.cs">
-      <DependentUpon>ITypeInspector.cs</DependentUpon>
-    </Compile>
+    <Compile Include="TypeActivator.cs" />
+    <Compile Include="TypeInspector.cs" />
     <Compile Include="TypeMap.cs" />
     <Compile Include="TypeMapperException.cs" />
   </ItemGroup>
