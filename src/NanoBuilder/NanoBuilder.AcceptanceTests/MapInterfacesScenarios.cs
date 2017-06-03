@@ -16,7 +16,7 @@ namespace NanoBuilder.AcceptanceTests
          const int cacheSize = 256;
 
          var fileSystemCache = ObjectBuilder.For<FileSystemCache>()
-            .MapInterfacesTo<MoqMapper>()
+            .MapInterfacesWith<MoqMapper>()
             .With( cacheSize )
             .Build();
 
@@ -28,7 +28,7 @@ namespace NanoBuilder.AcceptanceTests
       public void CanMapInterfacesToMoqMocks()
       {
          var logger = ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<MoqMapper>()
+            .MapInterfacesWith<MoqMapper>()
             .Build();
 
          Mock.Get( logger.FileSystem ).Should().BeOfType<Mock<IFileSystem>>();
@@ -38,7 +38,7 @@ namespace NanoBuilder.AcceptanceTests
       public void CanMapInterfacesToRhinoMocks()
       {
          var logger = ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<RhinoMocksMapper>()
+            .MapInterfacesWith<RhinoMocksMapper>()
             .Build();
 
          logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( IMockedObject ) );
@@ -48,7 +48,7 @@ namespace NanoBuilder.AcceptanceTests
       public void CanMapInterfacesToNSubstituteMocks()
       {
          var logger = ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<NSubstituteMapper>()
+            .MapInterfacesWith<NSubstituteMapper>()
             .Build();
 
          logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( ICallRouter ) );
@@ -58,7 +58,7 @@ namespace NanoBuilder.AcceptanceTests
       public void CanMapInterfacesToFakeItEasyMocks()
       {
          var logger = ObjectBuilder.For<Logger>()
-            .MapInterfacesTo<FakeItEasyMapper>()
+            .MapInterfacesWith<FakeItEasyMapper>()
             .Build();
 
          logger.FileSystem.GetType().GetInterfaces().Should().Contain( typeof( ITaggable ) );

@@ -9,7 +9,7 @@ namespace NanoBuilder.UnitTests
    public class ParameterComposerTests
    {
       [Fact]
-      public void MapInterfacesTo_PassesMoqMapper_UsesFactoryToCreateMapper()
+      public void MapInterfacesWith_PassesMoqMapper_UsesFactoryToCreateMapper()
       {
          // Arrange
 
@@ -21,7 +21,7 @@ namespace NanoBuilder.UnitTests
 
          var parameterComposer = new FullParameterComposer<int>( typeInspectorMock.Object, null, mapperFactoryMock.Object, typeActivatorMock.Object, null );
 
-         parameterComposer.MapInterfacesTo<MoqMapper>();
+         parameterComposer.MapInterfacesWith<MoqMapper>();
          
          // Assert
 

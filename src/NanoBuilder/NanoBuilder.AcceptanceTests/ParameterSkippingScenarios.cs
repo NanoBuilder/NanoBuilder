@@ -27,7 +27,7 @@ namespace NanoBuilder.AcceptanceTests
          var fileSystemMock = new Mock<IFileSystem>();
 
          var fileSystemAggregator = ObjectBuilder.For<FileSystemAggregator>()
-            .MapInterfacesTo<MoqMapper>()
+            .MapInterfacesWith<MoqMapper>()
             .Skip<IFileSystem>()
             .With( fileSystemMock.Object )
             .Build();

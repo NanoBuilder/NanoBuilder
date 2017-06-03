@@ -11,6 +11,6 @@
       /// </summary>
       /// <typeparam name="TMapperType">The type of mapper to transform objects.</typeparam>
       /// <returns>The same <see cref="FullParameterComposer{T}"/>.</returns>
-      IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper;
+      IParameterComposer<T> MapInterfacesWith<TMapperType>() where TMapperType : ITypeMapper;
    }
 }

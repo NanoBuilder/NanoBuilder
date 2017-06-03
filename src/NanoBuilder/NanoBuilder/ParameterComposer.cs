@@ -26,7 +26,7 @@ namespace NanoBuilder
          _typeMap = typeMap;
       }
 
-      public IParameterComposer<T> MapInterfacesTo<TMapperType>() where TMapperType : ITypeMapper
+      public IParameterComposer<T> MapInterfacesWith<TMapperType>() where TMapperType : ITypeMapper
       {
          _interfaceMapper = _mapperFactory.Create<TMapperType>();
 
