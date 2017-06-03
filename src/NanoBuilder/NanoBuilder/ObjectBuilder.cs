@@ -11,7 +11,7 @@
       /// Begins building an object of the specified type.
       /// </summary>
       /// <typeparam name="T">The type of object to build.</typeparam>
-      /// <returns>An ObjectBuilder instance that can build the given type.</returns>
+      /// <returns>A builder that can put together the given type.</returns>
       public static IFullParameterComposer<T> For<T>()
       {
          var typeInspector = new TypeInspector();
