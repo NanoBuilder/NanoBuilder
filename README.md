@@ -47,7 +47,7 @@ using NanoBuilder;
 public void ExampleTest()
 {
     var complexSystem = ObjectBuilder.For<ComplexSystem>()
-        .MapInterfacesTo<MoqMapper>()
+        .MapInterfacesWith<MoqMapper>()
         .Build();
 
     // Any interfaces that complexSystem received via constructor have automatically
@@ -68,7 +68,7 @@ public void ExampleTest()
     var dependencyMock = new Mock<IDependency>();
 
     var complexSystem = ObjectBuilder.For<ComplexSystem>()
-        .MapInterfacesTo<MoqMapper>()
+        .MapInterfacesWith<MoqMapper>()
         .With( dependencyMock.Object )
         .Build();
 
@@ -79,7 +79,7 @@ public void ExampleTest()
 
 ## Can I use other mocking libraries?
 
-Yes! It all comes from whatever type is passed to `MapInterfacesTo<>`. There are several built into NanoBuilder that indicate how interfaces are automatically mocked. It currently supports the following:
+Yes! It all comes from whatever type is passed to `MapInterfacesWith<>`. There are several built into NanoBuilder that indicate how interfaces are automatically mocked. It currently supports the following:
 
 - Moq (`MoqMapper`)
 - RhinoMocks (`RhinoMocksMapper`)
