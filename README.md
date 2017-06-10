@@ -30,7 +30,7 @@ public void ExampleTest()
 
     // system has been created using a constructor that needs a string and int.
     // If other constructor parameters exist, they receive default values.
-    // This test only passes what is relevant to this scenario.
+    // This test only supplies what is relevant to this scenario.
 }
 ```
 
