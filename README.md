@@ -1,4 +1,4 @@
-﻿[![Build status](https://ci.appveyor.com/api/projects/status/k1n4ek7nbst9tl8y?svg=true)](https://ci.appveyor.com/project/alexwnovak/nanobuilder)
+﻿[![Build status](https://ci.appveyor.com/api/projects/status/i33gid4ty02be3rq?svg=true)](https://ci.appveyor.com/project/NanoBuilder/nanobuilder)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## NanoBuilder
