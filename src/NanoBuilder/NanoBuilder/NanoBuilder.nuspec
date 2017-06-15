@@ -9,7 +9,13 @@
     <projectUrl>https://github.com/NanoBuilder/NanoBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <releaseNotes>Version 0.9.1-alpha
+* Moved the project to its new repository
+* Updated package details to point to the new repository URL
+
+Version 0.9.0-alpha
+* Initial release
+</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>nanobuilder builder automated unit tests</tags>
   </metadata>
