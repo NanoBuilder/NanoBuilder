@@ -32,9 +32,9 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "0.9.0.0" )]
-[assembly: AssemblyFileVersion( "0.9.0.0" )]
-[assembly: AssemblyInformationalVersion( "0.9.0-alpha" )]
+[assembly: AssemblyVersion( "0.9.1.0" )]
+[assembly: AssemblyFileVersion( "0.9.1.0" )]
+[assembly: AssemblyInformationalVersion( "0.9.1-alpha" )]
 
 [assembly: InternalsVisibleTo( "NanoBuilder.UnitTests,PublicKey=00240000048000009400000006020000002400005253413100040000010001006378ba59d8ed5c231de361f24ecf0dfdffab87d0a7c347b6d068b6b7a20052dbbc7ae10d2049d5911e24a70242188d4d1e53f36c992c284220f3faeb8abf2a3a2487ecdcdac5bc2a1b853299fc897b4a562bcece9da2ea138cc2f09c9afe9ce95f53209ced3d847b93e6d335ccbf6e85706c1ddf3aab27cb9fbff3181d4d66e4" )]
 [assembly: InternalsVisibleTo( "DynamicProxyGenAssembly2, PublicKey=0024000004800000940000000602000000240000525341310004000001000100c547cac37abd99c8db225ef2f6c8a3602f3b3606cc9891605d02baa56104f4cfc0734aa39b93bf7852f7d9266654753cc297e7d2edfe0bac1cdcf9f717241550e0a7b191195b7667bb4f64bcb8e2121380fd1d9d46ad2d92d2d15605093924cceaf74c4861eff62abf69b9291ed0a340e113be11e6a7d3113e92484cf7045cc7" )]
