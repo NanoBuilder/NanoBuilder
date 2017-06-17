@@ -31,7 +31,7 @@ namespace NanoBuilder.UnitTests
       }
 
       [Fact]
-      public void Create_CreatNSubstituteMapper_CreatesSuccessfully()
+      public void Create_CreateNSubstituteMapper_CreatesSuccessfully()
       {
          var typeInspectorMock = new Mock<ITypeInspector>();
          var mapperFactory = new MapperFactory( typeInspectorMock.Object );
@@ -42,7 +42,7 @@ namespace NanoBuilder.UnitTests
       }
 
       [Fact]
-      public void Create_CreatFakeItEasyMapper_CreatesSuccessfully()
+      public void Create_CreateFakeItEasyMapper_CreatesSuccessfully()
       {
          var typeInspectorMock = new Mock<ITypeInspector>();
          var mapperFactory = new MapperFactory( typeInspectorMock.Object );
