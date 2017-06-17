@@ -98,11 +98,11 @@ namespace NanoBuilder
                }
             }
 
-            var (parameter, found) = _typeMap.Get( constructorParameters[index].ParameterType );
+            var parameter = _typeMap.Get( constructorParameters[index].ParameterType );
 
-            if ( found )
+            if ( parameter.WasFound )
             {
-               callingParameters[index] = parameter;
+               callingParameters[index] = parameter.Instance;
             }
          }
 

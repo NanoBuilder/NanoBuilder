@@ -13,20 +13,20 @@ namespace NanoBuilder.UnitTests
          var typeMap = new TypeMap();
          typeMap.Add( expectedValue );
 
-         var (value, wasFound) = typeMap.Get( typeof( int ) );
+         var parameter = typeMap.Get( typeof( int ) );
 
-         value.Should().Be( expectedValue );
-         wasFound.Should().BeTrue();
+         parameter.Instance.Should().Be( expectedValue );
+         parameter.WasFound.Should().BeTrue();
       }
 
       [Fact]
       public void Get_DoesNotHaveType_ReturnsNullValueAndNotFound()
       {
          var typeMap = new TypeMap();
-         var (value, wasFound) = typeMap.Get( typeof( int ) );
+         var parameter = typeMap.Get( typeof( int ) );
 
-         value.Should().Be( null );
-         wasFound.Should().BeFalse();
+         parameter.Instance.Should().Be( null );
+         parameter.WasFound.Should().BeFalse();
       }
 
       [Fact]
@@ -39,14 +39,14 @@ namespace NanoBuilder.UnitTests
          typeMap.Add( expectedValue1 );
          typeMap.Add( expectedValue2 );
 
-         var (value1, wasfound1) = typeMap.Get( typeof( int ) );
-         var (value2, wasfound2) = typeMap.Get( typeof( int ) );
+         var parameter1 = typeMap.Get( typeof( int ) );
+         var parameter2 = typeMap.Get( typeof( int ) );
 
-         value1.Should().Be( expectedValue1 );
-         wasfound1.Should().BeTrue();
+         parameter1.Instance.Should().Be( expectedValue1 );
+         parameter1.WasFound.Should().BeTrue();
 
-         value2.Should().Be( expectedValue2 );
-         wasfound2.Should().BeTrue();
+         parameter2.Instance.Should().Be( expectedValue2 );
+         parameter2.WasFound.Should().BeTrue();
       }
 
       [Fact]
@@ -58,9 +58,9 @@ namespace NanoBuilder.UnitTests
          typeMap.Add( expectedValue );
 
          typeMap.Get( typeof( int ) );
-         var (_, wasfound) = typeMap.Get( typeof( int ) );
+         var parameter = typeMap.Get( typeof( int ) );
 
-         wasfound.Should().BeFalse();
+         parameter.WasFound.Should().BeFalse();
       }
 
       [Fact]

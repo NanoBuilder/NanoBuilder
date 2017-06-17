@@ -8,6 +8,6 @@ namespace NanoBuilder
 
       Type[] Flatten();
 
-      (object, bool) Get( Type parameterType );
+      Parameter Get( Type parameterType );
    }
 }
