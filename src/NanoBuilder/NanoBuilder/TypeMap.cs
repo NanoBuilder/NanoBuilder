@@ -20,17 +20,17 @@ namespace NanoBuilder
          typeMapEntries.Enqueue( parameter );
       }
 
-      public (object, bool) Get( Type parameterType )
+      public Parameter Get( Type parameterType )
       {
          if ( _mappings.TryGetValue( parameterType, out var queue ) )
          {
             if ( queue.Count > 0 )
             {
-               return (queue.Dequeue(), true);
+               return new Parameter( queue.Dequeue(), true );
             }
          }
 
-         return (null, false);
+         return new Parameter( null, false );
       }
 
       public Type[] Flatten()
