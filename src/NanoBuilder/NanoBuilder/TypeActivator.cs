@@ -1,4 +1,6 @@
-﻿namespace NanoBuilder
+﻿using System.Reflection;
+
+namespace NanoBuilder
 {
    internal class TypeActivator : ITypeActivator
    {
@@ -12,7 +14,7 @@
       {
          var type = typeof( T );
 
-         if ( TypeMapper != null && type.IsInterface )
+         if ( TypeMapper != null && type.GetTypeInfo().IsInterface )
          {
             return (T) TypeMapper.CreateForInterface( type );
          }

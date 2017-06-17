@@ -89,7 +89,9 @@ namespace NanoBuilder
 
          for ( int index = 0; index < constructorParameters.Length; index++ )
          {
-            if ( constructorParameters[index].ParameterType.IsInterface )
+            var typeInfo = constructorParameters[index].ParameterType.GetTypeInfo();
+
+            if ( typeInfo.IsInterface )
             {
                if ( _interfaceMapper != null )
                {
