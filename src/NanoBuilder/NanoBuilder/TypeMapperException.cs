@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace NanoBuilder
 {
@@ -36,24 +35,6 @@ namespace NanoBuilder
       /// (Nothing in Visual Basic) if no inner exception is specified.</param>
       public TypeMapperException( string message, Exception innerException )
          : base( message, innerException )
-      {
-      }
-
-      /// <summary>
-      /// Initializes a new instance of the TypeMapperException class with serialized data.
-      /// </summary>
-      /// <param name="info">
-      /// The System.Runtime.Serialization.SerializationInfo that holds the serialized
-      /// object data about the exception being thrown.
-      /// </param>
-      /// <param name="context">
-      /// The System.Runtime.Serialization.StreamingContext that contains contextual information
-      /// about the source or destination.
-      /// </param>
-      /// <exception cref="ArgumentNullException">The info parameter is null.</exception>
-      /// <exception cref="SerializationException">The class name is null or System.Exception.HResult is zero (0).</exception>
-      protected TypeMapperException( SerializationInfo info, StreamingContext context )
-         : base( info, context )
       {
       }
    }
