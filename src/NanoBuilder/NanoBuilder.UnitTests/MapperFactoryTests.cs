@@ -60,7 +60,7 @@ namespace NanoBuilder.UnitTests
 
          Action create = () => mapperFactory.Create<FaultyMapper>();
 
-         create.ShouldThrow<NanoBuilderException>().Which.InnerException.Should().BeOfType<MissingMethodException>();
+         create.ShouldThrow<NanoBuilderException>();
       }
    }
 }

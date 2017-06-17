@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -14,14 +15,17 @@ namespace NanoBuilder
 
       public T Create<T>() where T: ITypeMapper
       {
-         try
+         var constructor = typeof( T ).GetTypeInfo()
+            .DeclaredConstructors
+            .SingleOrDefault( ci => ci.GetParameters().Length == 1
+               && ci.GetParameters()[0].ParameterType == typeof( ITypeInspector ) );
+
+         if ( constructor == null )
          {
-            return (T) Activator.CreateInstance( typeof( T ), BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { _typeInspector }, null );
+            throw new NanoBuilderException( Resources.NanoBuilderMessage );
          }
-         catch ( MissingMethodException ex )
-         {
-            throw new NanoBuilderException( Resources.NanoBuilderMessage, ex );
-         }
+
+         return (T) constructor.Invoke( new object[] { _typeInspector } );
       }
    }
 }
