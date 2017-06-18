@@ -56,13 +56,13 @@
     <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
-      <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
-      <Name>NanoBuilder</Name>
-    </ProjectReference>
+    <None Include="NanoBuilder.Stubs.snk" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NanoBuilder.Stubs.snk" />
+    <ProjectReference Include="..\NanoBuilderStandard\NanoBuilderStandard.csproj">
+      <Project>{3364a77b-d5e2-48f3-b6ec-ba6991f0b797}</Project>
+      <Name>NanoBuilderStandard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
