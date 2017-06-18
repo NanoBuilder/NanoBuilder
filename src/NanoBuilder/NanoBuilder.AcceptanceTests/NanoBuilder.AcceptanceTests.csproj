@@ -93,9 +93,9 @@
       <Project>{133db86f-ff3e-4a8d-b815-84dd2c4c68ef}</Project>
       <Name>NanoBuilder.Stubs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
-      <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
-      <Name>NanoBuilder</Name>
+    <ProjectReference Include="..\NanoBuilderStandard\NanoBuilderStandard.csproj">
+      <Project>{3364a77b-d5e2-48f3-b6ec-ba6991f0b797}</Project>
+      <Name>NanoBuilderStandard</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
