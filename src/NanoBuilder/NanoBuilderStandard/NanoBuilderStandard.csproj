@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>NanoBuilder.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 </Project>
