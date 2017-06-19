@@ -7,7 +7,6 @@ namespace NanoBuilder
    /// constructors. In this case, the <see cref="FullParameterComposer{T}" /> doesn't know what constructor
    /// to use, since there are multiple options.
    /// </summary>
-   [Serializable]
    public class AmbiguousConstructorException : Exception
    {
       /// <summary>

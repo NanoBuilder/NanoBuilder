@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NanoBuilder.Stubs</RootNamespace>
     <AssemblyName>NanoBuilder.Stubs</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,13 +56,13 @@
     <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
-      <Project>{d967dc7c-6c7f-40ea-9d1a-3643640e1d13}</Project>
-      <Name>NanoBuilder</Name>
-    </ProjectReference>
+    <None Include="NanoBuilder.Stubs.snk" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NanoBuilder.Stubs.snk" />
+    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
+      <Project>{3364a77b-d5e2-48f3-b6ec-ba6991f0b797}</Project>
+      <Name>NanoBuilder</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

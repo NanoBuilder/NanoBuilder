@@ -35,7 +35,7 @@ namespace NanoBuilder
             throw new TypeMapperException( Resources.FakeItEasyMessage );
          }
 
-         var fakeMethod = ( from m in mockType.GetMethods( BindingFlags.Public | BindingFlags.Static )
+         var fakeMethod = ( from m in mockType.GetTypeInfo().DeclaredMethods
                             where m.Name == "Fake"
                                && m.GetParameters().Length == 0
                                && m.GetGenericArguments().Length == 1

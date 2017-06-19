@@ -6,7 +6,6 @@ namespace NanoBuilder
    /// Represents an error when the Type Mapper is unable to transform the source type into the
    /// destination object.
    /// </summary>
-   [Serializable]
    public class TypeMapperException : Exception
    {
       /// <summary>

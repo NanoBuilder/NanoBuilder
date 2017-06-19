@@ -5,7 +5,6 @@ namespace NanoBuilder
    /// <summary>
    /// Represents an error internal to NanoBuilder. If you see this, it's likely a bug in NanoBuilder.
    /// </summary>
-   [Serializable]
    public class NanoBuilderException : Exception
    {
       /// <summary>

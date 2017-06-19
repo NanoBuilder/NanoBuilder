@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
@@ -7,6 +8,6 @@ namespace NanoBuilder
    {
       public Type GetType( string typeName ) => Type.GetType( typeName );
 
-      public ConstructorInfo[] GetConstructors( Type type ) => type.GetConstructors();
+      public ConstructorInfo[] GetConstructors( Type type ) => type.GetTypeInfo().DeclaredConstructors.ToArray();
    }
 }

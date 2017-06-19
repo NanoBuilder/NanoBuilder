@@ -35,7 +35,7 @@ namespace NanoBuilder
             throw new TypeMapperException( Resources.RhinoMocksMapperMessage );
          }
 
-         var generateMethod = ( from m in mockType.GetMethods( BindingFlags.Public | BindingFlags.Static )
+         var generateMethod = ( from m in mockType.GetTypeInfo().DeclaredMethods
                                 from p in m.GetParameters()
                                 where m.Name == "GenerateStub"
                                    && p.ParameterType == typeof( object[] )

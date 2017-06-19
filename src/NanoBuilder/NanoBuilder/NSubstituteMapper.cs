@@ -35,7 +35,7 @@ namespace NanoBuilder
             throw new TypeMapperException( Resources.NSubstituteMapperMessage );
          }
 
-         var forMethod = ( from m in mockType.GetMethods( BindingFlags.Public | BindingFlags.Static )
+         var forMethod = ( from m in mockType.GetTypeInfo().DeclaredMethods
                            from p in m.GetParameters()
                            where m.Name == "For"
                            && p.ParameterType == typeof( object[] )

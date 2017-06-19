@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder", "NanoBuilder\NanoBuilder.csproj", "{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.UnitTests", "NanoBuilder.UnitTests\NanoBuilder.UnitTests.csproj", "{DD77680F-C452-4401-BA3A-1B4979356934}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{575E4333-9DEA-4997-9386-76B64617271F}"
@@ -16,16 +14,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.AcceptanceTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.Stubs", "NanoBuilder.Stubs\NanoBuilder.Stubs.csproj", "{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder", "NanoBuilder\NanoBuilder.csproj", "{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D967DC7C-6C7F-40EA-9D1A-3643640E1D13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD77680F-C452-4401-BA3A-1B4979356934}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +34,10 @@ Global
 		{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
