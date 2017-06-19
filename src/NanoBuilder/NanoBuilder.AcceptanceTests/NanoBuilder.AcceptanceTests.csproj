@@ -100,9 +100,9 @@
       <Project>{133db86f-ff3e-4a8d-b815-84dd2c4c68ef}</Project>
       <Name>NanoBuilder.Stubs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NanoBuilderStandard\NanoBuilderStandard.csproj">
+    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
       <Project>{3364a77b-d5e2-48f3-b6ec-ba6991f0b797}</Project>
-      <Name>NanoBuilderStandard</Name>
+      <Name>NanoBuilder</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

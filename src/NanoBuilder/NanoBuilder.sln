@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.AcceptanceTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder.Stubs", "NanoBuilder.Stubs\NanoBuilder.Stubs.csproj", "{133DB86F-FF3E-4A8D-B815-84DD2C4C68EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilderStandard", "NanoBuilderStandard\NanoBuilderStandard.csproj", "{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoBuilder", "NanoBuilder\NanoBuilder.csproj", "{3364A77B-D5E2-48F3-B6EC-BA6991F0B797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

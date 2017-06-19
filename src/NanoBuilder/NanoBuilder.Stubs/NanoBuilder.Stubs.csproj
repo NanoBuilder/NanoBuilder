@@ -59,9 +59,9 @@
     <None Include="NanoBuilder.Stubs.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanoBuilderStandard\NanoBuilderStandard.csproj">
+    <ProjectReference Include="..\NanoBuilder\NanoBuilder.csproj">
       <Project>{3364a77b-d5e2-48f3-b6ec-ba6991f0b797}</Project>
-      <Name>NanoBuilderStandard</Name>
+      <Name>NanoBuilder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
