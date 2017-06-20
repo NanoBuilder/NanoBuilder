@@ -3,19 +3,19 @@
 
 ## NanoBuilder
 
-NanoBuilder is a modest way to construct objects, by letting you specifying relevant constructor parameters, and omitting the rest. NanoBuilder fills in the rest of 'em with defaults or mocks.
+NanoBuilder is a modest way to construct objects by letting you specify only relevant constructor parameters. Omit the rest and NanoBuilder will fill 'em in with defaults or mocks.
 
 ## What for?
 
 NanoBuilder helps you write maintainable tests.
 
-When tests directly create objects, they tie themselves to the constructors and dependencies. When those things change, the tests also need to change.
+When tests directly create objects, they _depend_ on the constructors. When constructors change, the tests also need to change.
 
-Instead, NanoBuilder allows you to specify only the dependencies that are relevant to your tests, decoupling the test from the system's constructors.
+Instead, NanoBuilder allows you to specify only the dependencies that are relevant to your scenario, decoupling the test from the system's constructors.
 
 ## How does it work?
 
-You specify the type of object to build, pass any number of objects with the fluent syntax (these will become the constructor parameters), and then call `Build()`!
+Specify the type of object to build (the system being tested), pass objects with the fluent syntax (these will become the constructor parameters), and then call `Build()`!
 
 ```csharp
 using NanoBuilder;
@@ -34,7 +34,7 @@ public void ExampleTest()
 }
 ```
 
-NanoBuilder creates the system under test using parameters you specify. Any omitted parameters use their default values.
+NanoBuilder creates the system under test using parameters you specify. Omitted parameters use their default values.
 
 ## What about mocks?
 
@@ -86,5 +86,5 @@ Yes! It all comes from whatever type is passed to `MapInterfacesWith<>`. There a
 - NSubstitute (`NSubstituteMapper`)
 - FakeItEasy (`FakeItEasyMapper`)
 
-**Make sure you've installed your mocking library's NuGet package, or NanoBuilder will fail to mock your interfaces!**
+**Make sure you've installed your mocking library's NuGet package, or NanoBuilder will fail to mock your interfaces and you'll get an exception!**
 
