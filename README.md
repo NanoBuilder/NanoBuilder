@@ -7,7 +7,7 @@ NanoBuilder is a modest way to construct objects, by letting you specifying rele
 
 ## What for?
 
-NanoBuilder can help you write more maintainable tests.
+NanoBuilder helps you write maintainable tests.
 
 When tests directly create objects, they tie themselves to the constructors and dependencies. When those things change, the tests also need to change.
 
