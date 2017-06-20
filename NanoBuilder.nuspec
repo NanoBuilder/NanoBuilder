@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NanoBuilder</id>
+    <version>0.9.2-alpha</version>
+    <authors>Alex Novak</authors>
+    <owners>alexwnovak</owners>
+    <licenseUrl>https://github.com/alexwnovak/NanoBuilder/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/alexwnovak/NanoBuilder</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A modest way to build objects</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright © Alex Novak 2017. All rights reserved.</copyright>
+    <tags>nanobuilder builder automated unit tests</tags>
+  </metadata>
+  <files>
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.dll" target="lib\netstandard15" />
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.pdb" target="lib\netstandard15" />
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.xml" target="lib\netstandard15" />
+  </files>
+</package>
