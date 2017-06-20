@@ -68,12 +68,11 @@ Task( "CreatePackage" )
    
    var settings = new NuGetPackSettings
    {   
-     BasePath = "./src/NanoBuilder/NanoBuilder.Tests/bin/" + Directory( configuration ),
      OutputDirectory = "./artifacts",
      ArgumentCustomization = args => args.Append( "-Prop Configuration=" + configuration )
    };
    
-   NuGetPack( "./src/NanoBuilder/NanoBuilder/NanoBuilder.csproj", settings );
+   NuGetPack( "./NanoBuilder.nuspec", settings );
 } );
 
 //===========================================================================
