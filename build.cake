@@ -4,6 +4,7 @@ var target = Argument( "target", "Default" );
 var configuration = Argument( "configuration", "Release" );
 
 var buildDir = Directory( "./src/NanoBuilder/NanoBuilder/bin" ) + Directory( configuration );
+var artifactsDir = Directory( "./artifacts" );
 
 //===========================================================================
 // Clean Task
@@ -13,6 +14,7 @@ Task( "Clean" )
    .Does( () =>
 {
    CleanDirectory( buildDir );
+   CleanDirectory( artifactsDir );
 });
 
 //===========================================================================
@@ -66,12 +68,11 @@ Task( "CreatePackage" )
    
    var settings = new NuGetPackSettings
    {   
-     BasePath = "./src/NanoBuilder/NanoBuilder.Tests/bin/" + Directory( configuration ),
      OutputDirectory = "./artifacts",
      ArgumentCustomization = args => args.Append( "-Prop Configuration=" + configuration )
    };
    
-   NuGetPack( "./src/NanoBuilder/NanoBuilder/NanoBuilder.csproj", settings );
+   NuGetPack( "./NanoBuilder.nuspec", settings );
 } );
 
 //===========================================================================
