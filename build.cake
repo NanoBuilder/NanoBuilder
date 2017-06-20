@@ -4,6 +4,7 @@ var target = Argument( "target", "Default" );
 var configuration = Argument( "configuration", "Release" );
 
 var buildDir = Directory( "./src/NanoBuilder/NanoBuilder/bin" ) + Directory( configuration );
+var artifactsDir = Directory( "./artifacts" );
 
 //===========================================================================
 // Clean Task
@@ -13,6 +14,7 @@ Task( "Clean" )
    .Does( () =>
 {
    CleanDirectory( buildDir );
+   CleanDirectory( artifactsDir );
 });
 
 //===========================================================================
