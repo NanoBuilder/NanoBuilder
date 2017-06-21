@@ -14,8 +14,8 @@
     <tags>nanobuilder builder automated unit tests</tags>
   </metadata>
   <files>
-    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.dll" target="lib\netstandard15" />
-    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.pdb" target="lib\netstandard15" />
-    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.5\NanoBuilder.xml" target="lib\netstandard15" />
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.3\NanoBuilder.dll" target="lib\netstandard1.3" />
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.3\NanoBuilder.pdb" target="lib\netstandard1.3" />
+    <file src="src\NanoBuilder\NanoBuilder\bin\$configuration$\netstandard1.3\NanoBuilder.xml" target="lib\netstandard1.3" />
   </files>
 </package>
