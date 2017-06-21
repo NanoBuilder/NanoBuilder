@@ -1,6 +1,6 @@
-﻿[![Build status](https://ci.appveyor.com/api/projects/status/i33gid4ty02be3rq?svg=true)](https://ci.appveyor.com/project/NanoBuilder/nanobuilder)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![NuGet](https://img.shields.io/nuget/v/NanoBuilder.svg?colorB=dd6600)](https://www.nuget.org/packages/NanoBuilder/)
+﻿[![Build status](https://img.shields.io/appveyor/ci/nanobuilder/nanobuilder.svg?style=flat-square)](https://ci.appveyor.com/project/NanoBuilder/nanobuilder)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![NuGet](https://img.shields.io/nuget/v/NanoBuilder.svg?colorB=dd6600&style=flat-square)](https://www.nuget.org/packages/NanoBuilder/)
 
 ## NanoBuilder
 
