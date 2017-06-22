@@ -6,12 +6,12 @@ using Xunit;
 
 namespace NanoBuilder.UnitTests
 {
-   public class ConstructorMatcherTests
+   public class ConstructorMatcherOldTests
    {
       [Fact]
       public void Match_MapsOneIntButConstructorTakesTwoInts_FindsConstructor()
       {
-         var constructorMatcher = new ConstructorMatcher();
+         var constructorMatcher = new ConstructorMatcherOld();
 
          var constructors = typeof( Vertex ).GetConstructors();
          var types = new[] { typeof( int ) };
@@ -25,7 +25,7 @@ namespace NanoBuilder.UnitTests
       [Fact]
       public void Match_HasOneIntButConstructorHasMultipleIntConstructors_ThrownExceptionIndicatesAmbiguousConstructors()
       {
-         var constructorMatcher = new ConstructorMatcher();
+         var constructorMatcher = new ConstructorMatcherOld();
 
          var constructors = typeof( Version ).GetConstructors();
          var types = new[] { typeof( int ) };
@@ -41,7 +41,7 @@ namespace NanoBuilder.UnitTests
       [Fact]
       public void Match_NoSuitableConstructorsFoundForMappedTypes_ThrowsAmbiguousConstructorException()
       {
-         var constructorMatcher = new ConstructorMatcher();
+         var constructorMatcher = new ConstructorMatcherOld();
 
          var constructors = typeof( TimeSpan ).GetConstructors();
          var types = new[] { typeof( string ) };

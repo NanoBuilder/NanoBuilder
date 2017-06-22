@@ -15,7 +15,7 @@
       public static IFullParameterComposer<T> For<T>()
       {
          var typeInspector = new TypeInspector();
-         var constructorMatcher = new ConstructorMatcher();
+         var constructorMatcher = new ConstructorMatcherOld();
          var mapperFactory = new MapperFactory( typeInspector );
          var typeActivator = new TypeActivator();
          var typeMap = new TypeMap();

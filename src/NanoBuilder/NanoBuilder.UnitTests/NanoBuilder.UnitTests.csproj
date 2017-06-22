@@ -81,7 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstructorMatcherTests.cs" />
+    <Compile Include="ConstructorMatcherOldTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="FakeItEasyMapperTests.cs" />
     <Compile Include="MapperFactoryTests.cs" />

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace NanoBuilder
 {
-   internal class ConstructorMatcher : IConstructorMatcher
+   internal class ConstructorMatcherOld : IConstructorMatcher
    {
       public ConstructorInfo Match( ConstructorInfo[] constructors, Type[] types )
       {
