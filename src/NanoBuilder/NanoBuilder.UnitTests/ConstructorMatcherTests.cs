@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using FluentAssertions;
+using Moq;
+using NanoBuilder.UnitTests.Helpers;
 using Xunit;
+using Array = NanoBuilder.UnitTests.Helpers.Array;
 
 namespace NanoBuilder.UnitTests
 {
@@ -23,6 +26,25 @@ namespace NanoBuilder.UnitTests
          var matches = constructorMatcher.GetMatches();
 
          matches.Should().BeEmpty();
+      }
+
+      [Fact]
+      public void GetMatches_AddsTypeThatNoConstructorDefines_ThrowsParameterMappingException()
+      {
+         // Arrange
+
+         var constructorMock = Constructor.With( typeof( int ) );
+         var constructors = Array.From( constructorMock.Object );
+
+         // Act
+
+         var constructorMatcher = new ConstructorMatcher( constructors );
+
+         Action add = () => constructorMatcher.Add( "A string" );
+
+         // Assert
+
+         add.ShouldThrow<ParameterMappingException>();
       }
    }
 }
