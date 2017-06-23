@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -12,6 +13,16 @@ namespace NanoBuilder.UnitTests
          Action ctor = () => new ConstructorMatcher( null );
 
          ctor.ShouldThrow<ArgumentException>();
+      }
+
+      [Fact]
+      public void GetMatches_SetupNoParameters_ReturnsEmptySet()
+      {
+         var constructorMatcher = new ConstructorMatcher( Enumerable.Empty<IConstructor>() );
+
+         var matches = constructorMatcher.GetMatches();
+
+         matches.Should().BeEmpty();
       }
    }
 }
