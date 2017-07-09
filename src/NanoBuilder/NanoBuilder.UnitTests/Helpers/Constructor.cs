@@ -5,11 +5,11 @@ namespace NanoBuilder.UnitTests.Helpers
 {
    internal static class Constructor
    {
-      public static Mock<IConstructor> With( Type type )
+      public static Mock<IConstructor> With( params Type[] types )
       {
          var constructorMock = new Mock<IConstructor>();
-         
-         constructorMock.SetupGet( c => c.Type ).Returns( type );
+
+         constructorMock.SetupGet( c => c.ParameterTypes ).Returns( types );
 
          return constructorMock;
       }

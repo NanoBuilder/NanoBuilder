@@ -4,7 +4,7 @@ namespace NanoBuilder
 {
    internal interface IConstructor
    {
-      Type Type
+      Type[] ParameterTypes
       {
          get;
       }
