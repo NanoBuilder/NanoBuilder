@@ -46,5 +46,26 @@ namespace NanoBuilder.UnitTests
 
          add.ShouldThrow<ParameterMappingException>();
       }
+
+      [Fact]
+      public void GetMatches_AddsTypeThatMatchesTheOneConstructor_ReturnsTheMatch()
+      {
+         // Arrange
+
+         var constructorMock = Constructor.With( typeof( int ) );
+         var constructors = Array.From( constructorMock.Object );
+
+         // Act
+
+         var constructorMatcher = new ConstructorMatcher( constructors );
+
+         constructorMatcher.Add( 5 );
+
+         var matches = constructorMatcher.GetMatches();
+
+         // Assert
+
+         matches.Should().HaveCount( 1 ).And.Contain( constructorMock.Object );
+      }
    }
 }

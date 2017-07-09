@@ -6,7 +6,9 @@ namespace NanoBuilder
 {
    internal class ConstructorMatcher
    {
+      private List<TypeEntry> _typeEntries = new List<TypeEntry>();
       private readonly IEnumerable<IConstructor> _constructors;
+      private IEnumerable<IConstructor> _currentMatches = Enumerable.Empty<IConstructor>();
 
       public ConstructorMatcher( IEnumerable<IConstructor> constructors )
       {
@@ -26,12 +28,20 @@ namespace NanoBuilder
             throw new ParameterMappingException( message );
          }
 
-         throw new NotImplementedException();
+         var typeEntry = new TypeEntry( typeof( T ), instance );
+         _typeEntries.Add( typeEntry );
+
+         UpdateMatches();
       }
 
-      public IEnumerable<IConstructor> GetMatches()
+      private void UpdateMatches()
       {
-         return Enumerable.Empty<IConstructor>();
+         if ( _constructors.First().Type == _typeEntries.First().Type )
+         {
+            _currentMatches = new [] { _constructors.First() };
+         }
       }
+
+      public IEnumerable<IConstructor> GetMatches() => _currentMatches;
    }
 }
