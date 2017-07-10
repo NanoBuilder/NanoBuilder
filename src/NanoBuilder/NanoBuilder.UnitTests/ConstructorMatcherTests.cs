@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FluentAssertions;
-using Moq;
+using NanoBuilder.Stubs;
 using NanoBuilder.UnitTests.Helpers;
 using Xunit;
 using Array = NanoBuilder.UnitTests.Helpers.Array;
@@ -19,13 +19,11 @@ namespace NanoBuilder.UnitTests
       }
 
       [Fact]
-      public void GetMatches_SetupNoParameters_ReturnsEmptySet()
+      public void GetMatches_SetupNoParameters_ThrowsArgumentException()
       {
-         var constructorMatcher = new ConstructorMatcher( Enumerable.Empty<IConstructor>() );
+         Action ctor = () => new ConstructorMatcher( Enumerable.Empty<IConstructor>() );
 
-         var matches = constructorMatcher.GetMatches();
-
-         matches.Should().BeEmpty();
+         ctor.ShouldThrow<ArgumentException>();
       }
 
       [Fact]
@@ -65,11 +63,11 @@ namespace NanoBuilder.UnitTests
 
          // Assert
 
-         matches.Should().HaveCount( 1 ).And.Contain( constructorMock.Object );
+         matches.Should().Be( constructorMock.Object );
       }
 
       [Fact]
-      public void GetMatches_AddsTypeThatMatchesTwoConstructors_ThrowsAmbiguousConstructorException()
+      public void GetMatches_MatchesTwoConstructorsButMatchesOnePerfectly_ReturnsThePerfectMatch()
       {
          // Arrange
 
@@ -83,11 +81,77 @@ namespace NanoBuilder.UnitTests
 
          constructorMatcher.Add( 5 );
 
-         Action getMatches = () => constructorMatcher.GetMatches();
+         // Assert
+
+         var matches = constructorMatcher.GetMatches();
+
+         matches.Should().Be( constructorMock1.Object );
+      }
+
+      [Fact]
+      public void GetMatches_AddsTwoTypesThatMatchesConstructor_ReturnsTheMatch()
+      {
+         // Arrange
+
+         var constructorMock1 = Constructor.With( typeof( int ) );
+         var constructorMock2 = Constructor.With( typeof( int ), typeof( int ) );
+         var constructors = Array.From( constructorMock1.Object, constructorMock2.Object );
+
+         // Act
+
+         var constructorMatcher = new ConstructorMatcher( constructors );
+
+         constructorMatcher.Add( 5 );
+         constructorMatcher.Add( 6 );
 
          // Assert
 
-         getMatches.ShouldThrow<AmbiguousConstructorException>();
+         var matches = constructorMatcher.GetMatches();
+
+         matches.Should().Be( constructorMock2.Object );
+      }
+
+      [Fact]
+      public void Match_MapsOneIntButConstructorTakesTwoInts_FindsConstructor()
+      {
+         var constructorMatcher = new ConstructorMatcherOld();
+
+         var constructors = typeof( Vertex ).GetConstructors();
+         var types = new[] { typeof( int ) };
+
+         var constructor = constructorMatcher.Match( constructors, types );
+
+         var parameterTypes = constructor.GetParameters().Select( pi => pi.ParameterType );
+         parameterTypes.Should().HaveCount( 2 ).And.ContainInOrder( typeof( int ), typeof( int ) );
+      }
+
+      [Fact]
+      public void Match_HasOneIntButConstructorHasMultipleIntConstructors_ThrownExceptionIndicatesAmbiguousConstructors()
+      {
+         var constructorMatcher = new ConstructorMatcherOld();
+
+         var constructors = typeof( Version ).GetConstructors();
+         var types = new[] { typeof( int ) };
+
+         Action match = () => constructorMatcher.Match( constructors, types );
+
+         match.ShouldThrow<AmbiguousConstructorException>().Where( e =>
+            e.Message.Contains( "Void .ctor(Int32, Int32, Int32, Int32)" ) &&
+            e.Message.Contains( "Void .ctor(Int32, Int32, Int32)" ) &&
+            e.Message.Contains( "Void .ctor(Int32, Int32)" ) );
+      }
+
+      [Fact]
+      public void Match_NoSuitableConstructorsFoundForMappedTypes_ThrowsAmbiguousConstructorException()
+      {
+         var constructorMatcher = new ConstructorMatcherOld();
+
+         var constructors = typeof( TimeSpan ).GetConstructors();
+         var types = new[] { typeof( string ) };
+
+         Action match = () => constructorMatcher.Match( constructors, types );
+
+         match.ShouldThrow<AmbiguousConstructorException>();
       }
    }
 }

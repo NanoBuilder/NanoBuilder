@@ -6,8 +6,8 @@ namespace NanoBuilder
 {
    internal class ConstructorMatcher
    {
-      private List<TypeEntry> _typeEntries = new List<TypeEntry>();
-      private readonly IEnumerable<IConstructor> _constructors;
+      private readonly List<TypeEntry> _typeEntries = new List<TypeEntry>();
+      private readonly IConstructor[] _constructors;
 
       public ConstructorMatcher( IEnumerable<IConstructor> constructors )
       {
@@ -16,7 +16,12 @@ namespace NanoBuilder
             throw new ArgumentException( "Constructors parameter must not be null", nameof( constructors ) );
          }
 
-         _constructors = constructors;
+         _constructors = constructors.ToArray();
+
+         if ( _constructors.Length == 0 )
+         {
+            throw new ArgumentException( "Constructors parameter must not be null", nameof( constructors ) );
+         }
       }
 
       public void Add<T>( T instance )
@@ -31,28 +36,40 @@ namespace NanoBuilder
          _typeEntries.Add( typeEntry );
       }
 
-      public IEnumerable<IConstructor> GetMatches()
+      public IConstructor GetMatches()
       {
-         IEnumerable<IConstructor> matches = Enumerable.Empty<IConstructor>();
+         var indexedConstructors = new Dictionary<IConstructor, int>();
+         var types = _typeEntries.Select( t => t.Type );
 
-         var firstParameterMatches = _constructors.Where( c => c.ParameterTypes.First() == _typeEntries.First().Type );
-
-         if ( firstParameterMatches.Count() > 1 )
+         foreach ( var constructor in _constructors )
          {
-            throw new AmbiguousConstructorException();
+            if ( constructor.ParameterTypes.SequenceEqual( types ) )
+            {
+               return constructor;
+            }
+
+            var intersection = constructor.ParameterTypes.Common( types );
+
+            int sharedParameters = intersection.Count();
+            indexedConstructors.Add( constructor, sharedParameters );
          }
 
-         if ( !_constructors.Any() )
+         var mostMatchedConstructors = indexedConstructors.OrderByDescending( k => k.Value );
+         int highestMatch = mostMatchedConstructors.First().Value;
+
+         var occurrencesWithHighestMatch = mostMatchedConstructors.Where( kvp => kvp.Value == highestMatch );
+         int overlappedMatches = occurrencesWithHighestMatch.Count();
+
+         if ( overlappedMatches > 1 )
          {
-            return matches;
+            string foundConstructorsMessage = occurrencesWithHighestMatch.Aggregate( string.Empty,
+                                                                                     ( i, j ) => i + "  " + j.Key + Environment.NewLine );
+
+            string exceptionMessage = string.Format( Resources.AmbiguousConstructorMessage, foundConstructorsMessage );
+            throw new AmbiguousConstructorException( exceptionMessage );
          }
 
-         if ( _constructors.First().ParameterTypes.First() == _typeEntries.First().Type )
-         {
-            matches = new[] { _constructors.First() };
-         }
-
-         return matches;
+         return mostMatchedConstructors.First().Key;
       }
    }
 }
