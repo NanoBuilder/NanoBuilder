@@ -7,4 +7,10 @@ namespace NanoBuilder
    {
       ConstructorInfo Match( ConstructorInfo[] constructors, Type[] types );
    }
+
+   internal interface IConstructorMatcherNew
+   {
+      void Add<T>( T instance );
+      IConstructor GetMatches();
+   }
 }

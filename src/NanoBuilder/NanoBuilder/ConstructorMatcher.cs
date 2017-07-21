@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NanoBuilder
 {
-   internal class ConstructorMatcher
+   internal class ConstructorMatcher : IConstructorMatcherNew
    {
       private readonly List<TypeEntry> _typeEntries = new List<TypeEntry>();
       private readonly IConstructor[] _constructors;

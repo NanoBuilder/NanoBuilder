@@ -1,12 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder
 {
    internal class FullParameterComposer<T> : IFullParameterComposer<T>
    {
-      private readonly ConstructorInfo[] _constructors;
-      private readonly IConstructorMatcher _constructorMatcher;
+      //private readonly ConstructorInfo[] _constructors;
+      private readonly IConstructorMatcherNew _constructorMatcher;
       private readonly IMapperFactory _mapperFactory;
       private readonly ITypeActivator _typeActivator;
       private readonly ITypeMap _typeMap;
@@ -14,12 +15,14 @@ namespace NanoBuilder
       private ITypeMapper _interfaceMapper;
 
       public FullParameterComposer( ITypeInspector typeInspector,
-         IConstructorMatcher constructorMatcher,
+         //Func<IConstructor[], IConstructorMatcher> constructorMatcherCreator,
+         IConstructorMatcherNew constructorMatcher,
          IMapperFactory mapperFactory,
          ITypeActivator typeActivator,
          ITypeMap typeMap )
       {
-         _constructors = typeInspector.GetConstructors( typeof( T ) );
+         //_constructors = typeInspector.GetConstructors( typeof( T ) );
+         //_constructorMatcher = constructorMatcherCreator( _constructors );
          _constructorMatcher = constructorMatcher;
          _mapperFactory = mapperFactory;
          _typeActivator = typeActivator;
