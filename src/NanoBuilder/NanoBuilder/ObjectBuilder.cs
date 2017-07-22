@@ -1,4 +1,6 @@
-﻿namespace NanoBuilder
+﻿using NanoBuilder.Flow;
+
+namespace NanoBuilder
 {
    /// <summary>
    /// Provides a way of creating objects by specifying arguments for the constructor. Relevant arguments

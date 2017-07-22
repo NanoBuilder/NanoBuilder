@@ -2,6 +2,7 @@
 using Xunit;
 using FluentAssertions;
 using Moq;
+using NanoBuilder.Flow;
 using NanoBuilder.Stubs;
 
 namespace NanoBuilder.UnitTests
