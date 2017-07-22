@@ -6,6 +6,7 @@
     <authors>Alex Novak</authors>
     <owners>alexwnovak</owners>
     <licenseUrl>https://github.com/NanoBuilder/NanoBuilder/blob/master/LICENSE</licenseUrl>
+    <iconUrl>https://github.com/NanoBuilder/NanoBuilder/raw/master/icon.png</iconUrl>
     <projectUrl>https://github.com/NanoBuilder/NanoBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modest way to build objects</description>
