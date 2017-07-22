@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace NanoBuilder
+namespace NanoBuilder.Flow
 {
    internal class FullParameterComposer<T> : IFullParameterComposer<T>
    {

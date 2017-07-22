@@ -1,4 +1,4 @@
-﻿namespace NanoBuilder
+﻿namespace NanoBuilder.Flow
 {
    /// <summary>
    /// This allows you decide how interfaces types can be initialized by default.

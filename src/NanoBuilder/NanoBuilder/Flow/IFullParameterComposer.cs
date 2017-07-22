@@ -1,4 +1,4 @@
-﻿namespace NanoBuilder
+﻿namespace NanoBuilder.Flow
 {
    /// <summary>
    /// A class that can configure constructor parameters.
