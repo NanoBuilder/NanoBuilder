@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
 using Xunit;
 using FluentAssertions;
 
@@ -28,6 +30,17 @@ namespace NanoBuilder.AcceptanceTests
             .Build();
 
          version.ToString().Should().Be( "1.0.3" );
+      }
+
+      [Fact]
+      public void CanBuildObjectWithOnlyOneArgumentOmittingTheOther()
+      {
+         var socketAddress = ObjectBuilder.For<SocketAddress>()
+            .With( 123 )
+            .Build();
+         
+         socketAddress.Family.Should().Be( default( AddressFamily ) );
+         socketAddress.Size.Should().Be( 123 );
       }
    }
 }

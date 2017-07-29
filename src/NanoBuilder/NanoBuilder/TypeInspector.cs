@@ -8,6 +8,7 @@ namespace NanoBuilder
    {
       public Type GetType( string typeName ) => Type.GetType( typeName );
 
-      public ConstructorInfo[] GetConstructors( Type type ) => type.GetTypeInfo().DeclaredConstructors.ToArray();
+      public ConstructorInfo[] GetConstructors( Type type )
+         => type.GetTypeInfo().DeclaredConstructors.Where( ci => ci.IsPublic ).ToArray();
    }
 }
