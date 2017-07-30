@@ -42,5 +42,21 @@ namespace NanoBuilder.AcceptanceTests
          socketAddress.Family.Should().Be( default( AddressFamily ) );
          socketAddress.Size.Should().Be( 123 );
       }
+
+      [Fact]
+      public void CanBuildObjectWithGenericParameter()
+      {
+         int[] array = { 1, 2, 3, 4, 5 };
+
+         var arraySegment = ObjectBuilder.For<ArraySegment<int>>()
+            .With( array )
+            .With( 1 )
+            .With( 3 )
+            .Build();
+
+         arraySegment.Array.Should().BeEquivalentTo( array );
+         arraySegment.Offset.Should().Be( 1 );
+         arraySegment.Count.Should().Be( 3 );
+      }
    }
 }
