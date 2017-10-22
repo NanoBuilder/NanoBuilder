@@ -81,8 +81,7 @@ namespace NanoBuilder.Flow
 
          var allMappedTypes = _typeMap.Flatten();
 
-         var constructors = typeof( T ).GetTypeInfo().DeclaredConstructors.ToArray();
-         var constructor = _constructorMatcher.Match( constructors, allMappedTypes );
+         var constructor = _constructorMatcher.Match( _constructors, allMappedTypes );
          var constructorParameters = constructor.GetParameters();
 
          var callingParameters = new object[constructorParameters.Length];

@@ -4,7 +4,7 @@ namespace NanoBuilder
 {
    internal static class Resources
    {
-      public const string AmbiguousConstructorMessage = "Multiple constructors were found matching the mapped types. Be more specific by mapping more types.\r\n\r\nConstructors found:\r\n{0}";
+      public const string AmbiguousConstructorMessage = "Multiple constructors were found matching the mapped types. Be more specific by mapping or skipping more types.\r\n\r\nConstructors found:\r\n{0}";
 
       public const string FakeItEasyMessage = "Unable to locate FakeItEasy.A type. Are you referencing FakeItEasy?";
 
