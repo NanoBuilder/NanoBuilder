@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>NanoBuilder</id>
-    <version>0.9.3-alpha</version>
+    <version>0.9.4</version>
     <authors>Alex Novak</authors>
     <owners>alexwnovak</owners>
     <licenseUrl>https://github.com/NanoBuilder/NanoBuilder/blob/master/LICENSE</licenseUrl>
@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/NanoBuilder/NanoBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modest way to build objects</description>
-    <releaseNotes>Version 0.9.3-alpha
+    <releaseNotes>Version 0.9.4
+* Removed alpha tag
+* Fixed bug that matched non-public constructors
+    
+Version 0.9.3-alpha
 * Fixing license and project URLs, still pointing to the old address
 * Adding project icon
     
