@@ -1,7 +1,9 @@
+using System;
 using NanoBuilder.Flow;
 
 namespace NanoBuilder
 {
+
    /// <summary>
    /// A class that can configure constructor parameters.
    /// </summary>
@@ -15,6 +17,14 @@ namespace NanoBuilder
       /// <param name="instance">The object that is being mapped for the given type.</param>
       /// <returns>The same <see cref="FullParameterComposer{T}"/>.</returns>
       IFullParameterComposer<T> With<TParameterType>( TParameterType instance );
+
+      /// <summary>
+      /// Configures a parameter for the object's constructor.
+      /// </summary>
+      /// <typeparam name="TParameterType">The type of object for the constructor.</typeparam>
+      /// <param name="instanceProvider">A Func that provides the constructor parameter value.</param>
+      /// <returns>The same <see cref="IFullParameterComposer{T}"/></returns>
+      IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider );
 
       /// <summary>
       /// Provides a default value for the given type, allowing you to "skip" mapping a

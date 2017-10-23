@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder.Flow
@@ -60,6 +61,11 @@ namespace NanoBuilder.Flow
 
          _typeMap.Add( instance );
 
+         return this;
+      }
+
+      public IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
+      {
          return this;
       }
 
