@@ -21,6 +21,5 @@ namespace NanoBuilder.AcceptanceTests
 
          build.ShouldThrow<ParameterMappingException>();
       }
-
    }
 }
