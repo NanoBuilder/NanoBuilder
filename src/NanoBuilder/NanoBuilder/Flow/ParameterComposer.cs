@@ -66,6 +66,8 @@ namespace NanoBuilder.Flow
 
       public IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
       {
+         _typeMap.Add( instanceProvider( new ParameterName() ) );
+
          return this;
       }
 
