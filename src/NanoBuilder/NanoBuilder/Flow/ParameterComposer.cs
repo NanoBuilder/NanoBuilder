@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace NanoBuilder.Flow
@@ -35,7 +36,7 @@ namespace NanoBuilder.Flow
          return this;
       }
 
-      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
+      private void ThrowIfParameterMatchesNoConstructor<TParameterType>( TParameterType instance )
       {
          var parameterMatches = from c in _constructors
                                 from p in c.GetParameters()
@@ -57,6 +58,22 @@ namespace NanoBuilder.Flow
 
             throw new ParameterMappingException( message );
          }
+      }
+
+      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
+      {
+         ThrowIfParameterMatchesNoConstructor( instance );
+
+         _typeMap.Add( instance );
+
+         return this;
+      }
+
+      public IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
+      {
+         var instance = instanceProvider( new ParameterName() );
+
+         ThrowIfParameterMatchesNoConstructor( instance );
 
          _typeMap.Add( instance );
 

@@ -92,6 +92,7 @@
     <Compile Include="BuildPrimitiveScenarios.cs" />
     <Compile Include="MapInterfacesScenarios.cs" />
     <Compile Include="MappingErrorScenarios.cs" />
+    <Compile Include="NamedParameterScenarios.cs" />
     <Compile Include="ParameterSkippingScenarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VariedConstructorScenarios.cs" />

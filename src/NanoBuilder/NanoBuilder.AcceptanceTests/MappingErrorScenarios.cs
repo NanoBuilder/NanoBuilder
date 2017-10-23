@@ -13,5 +13,14 @@ namespace NanoBuilder.AcceptanceTests
 
          with.ShouldThrow<ParameterMappingException>();
       }
+
+      [Fact]
+      public void With_NoConstructorAcceptsTheNamedParameterType_ThrowsParameterMappingException()
+      {
+         Action build = () => ObjectBuilder.For<Version>().With( someDouble => 100.0 );
+
+         build.ShouldThrow<ParameterMappingException>();
+      }
+
    }
 }
