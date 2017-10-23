@@ -36,7 +36,7 @@ namespace NanoBuilder.Flow
          return this;
       }
 
-      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
+      private void ThrowIfParameterMatchesNoConstructor<TParameterType>( TParameterType instance )
       {
          var parameterMatches = from c in _constructors
                                 from p in c.GetParameters()
@@ -58,6 +58,11 @@ namespace NanoBuilder.Flow
 
             throw new ParameterMappingException( message );
          }
+      }
+
+      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
+      {
+         ThrowIfParameterMatchesNoConstructor( instance );
 
          _typeMap.Add( instance );
 
@@ -66,7 +71,11 @@ namespace NanoBuilder.Flow
 
       public IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
       {
-         _typeMap.Add( instanceProvider( new ParameterName() ) );
+         var instance = instanceProvider( new ParameterName() );
+
+         ThrowIfParameterMatchesNoConstructor( instance );
+
+         _typeMap.Add( instance );
 
          return this;
       }
