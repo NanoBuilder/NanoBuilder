@@ -14,7 +14,7 @@ namespace NanoBuilder
       /// </summary>
       /// <typeparam name="T">The type of object to build.</typeparam>
       /// <returns>A builder that can put together the given type.</returns>
-      public static IFullParameterComposer<T> For<T>()
+      public static FullParameterComposer<T> For<T>()
       {
          var typeInspector = new TypeInspector();
          var constructorMatcher = new ConstructorMatcher();

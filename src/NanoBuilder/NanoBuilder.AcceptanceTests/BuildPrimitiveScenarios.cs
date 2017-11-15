@@ -33,5 +33,15 @@ namespace NanoBuilder.AcceptanceTests
 
          guid.ToString().Should().Be( guidString );
       }
+
+      [Fact]
+      public void Build_BuildingAGuidWithParameterImplicitly_ReturnsTheConstructedObject()
+      {
+         const string guidString = "86273ea7-b89d-45c2-a4f9-34f005e555da";
+
+         Guid guid = ObjectBuilder.For<Guid>().With( guidString );
+
+         guid.ToString().Should().Be( guidString );
+      }
    }
 }

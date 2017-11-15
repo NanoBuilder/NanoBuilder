@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace NanoBuilder.Flow
 {
-   internal class FullParameterComposer<T> : IFullParameterComposer<T>
+   public class FullParameterComposer<T> : IFullParameterComposer<T>
    {
       private readonly ConstructorInfo[] _constructors;
       private readonly IConstructorMatcher _constructorMatcher;
@@ -14,7 +14,7 @@ namespace NanoBuilder.Flow
 
       private ITypeMapper _interfaceMapper;
 
-      public FullParameterComposer( ITypeInspector typeInspector,
+      internal FullParameterComposer( ITypeInspector typeInspector,
          IConstructorMatcher constructorMatcher,
          IMapperFactory mapperFactory,
          ITypeActivator typeActivator,
@@ -25,6 +25,11 @@ namespace NanoBuilder.Flow
          _mapperFactory = mapperFactory;
          _typeActivator = typeActivator;
          _typeMap = typeMap;
+      }
+
+      public static implicit operator T( FullParameterComposer<T> composer )
+      {
+         return composer.Build();
       }
 
       public IParameterComposer<T> MapInterfacesWith<TMapperType>() where TMapperType : ITypeMapper
@@ -60,7 +65,7 @@ namespace NanoBuilder.Flow
          }
       }
 
-      public IFullParameterComposer<T> With<TParameterType>( TParameterType instance )
+      public FullParameterComposer<T> With<TParameterType>( TParameterType instance )
       {
          ThrowIfParameterMatchesNoConstructor( instance );
 
@@ -69,7 +74,7 @@ namespace NanoBuilder.Flow
          return this;
       }
 
-      public IFullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
+      public FullParameterComposer<T> With<TParameterType>( Func<ParameterName, TParameterType> instanceProvider )
       {
          var instance = instanceProvider( new ParameterName() );
 
